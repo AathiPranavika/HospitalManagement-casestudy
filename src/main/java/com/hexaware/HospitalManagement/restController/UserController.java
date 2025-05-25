@@ -11,9 +11,11 @@ import com.hexaware.HospitalManagement.exception.UserNotFoundException;
 import com.hexaware.HospitalManagement.service.IUserService;
 
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api/user")
+@Slf4j
 public class UserController {
 
     @Autowired
@@ -21,41 +23,61 @@ public class UserController {
 
     @GetMapping("/getAll")
     public List<User> getAllUser() {
-        return userService.getAllUsers();
+        log.info("Fetching all users");
+        List<User> users = userService.getAllUsers();
+        log.info("Total users fetched: {}", users.size());
+        return users;
     }
 
     @GetMapping("/getById/{id}")
     public User getUserById(@PathVariable Long id) throws UserNotFoundException {
-        return userService.getUserById(id);
+        log.info("Fetching user with ID: {}", id);
+        User user = userService.getUserById(id);
+        log.info("User fetched successfully: {}", user.getEmail());
+        return user;
     }
 
-    // CHANGE ROLE TO UPPERCASE
     @GetMapping("/getByRole/{role}")
     public List<User> getUserByRole(@PathVariable User.Role role) {
-        return userService.getUsersByRole(role);
+        log.info("Fetching users with role: {}", role);
+        List<User> users = userService.getUsersByRole(role);
+        log.info("Total users with role {}: {}", role, users.size());
+        return users;
     }
 
     @GetMapping("/getByEmail/{email}")
     public User getUserByEmail(@PathVariable String email) throws UserNotFoundException {
-        return userService.getUserByEmail(email);
+        log.info("Fetching user by email: {}", email);
+        User user = userService.getUserByEmail(email);
+        log.info("User fetched successfully: {}", user.getUserId());
+        return user;
     }
 
     @PostMapping("/add")
     public User addUser(@Valid @RequestBody UserDTO userDTO) {
-        return userService.registerUser(userDTO);
+        log.info("Registering new user with email: {}", userDTO.getEmail());
+        User user = userService.registerUser(userDTO);
+        log.info("User registered successfully with ID: {}", user.getUserId());
+        return user;
     }
 
     @PutMapping("/update/{id}")
     public User updateUser(@PathVariable Long id, @Valid @RequestBody UserDTO userDTO) throws UserNotFoundException {
-        return userService.updateUser(id, userDTO);
+        log.info("Updating user with ID: {}", id);
+        User updatedUser = userService.updateUser(id, userDTO);
+        log.info("User updated successfully: {}", updatedUser.getEmail());
+        return updatedUser;
     }
 
     @DeleteMapping("/deleteById/{id}")
     public String deleteUser(@PathVariable Long id) throws UserNotFoundException {
+        log.info("Deleting user with ID: {}", id);
         boolean deleted = userService.deleteUser(id);
         if (deleted) {
+            log.info("User deleted successfully with ID: {}", id);
             return "User deleted successfully";
         } else {
+            log.warn("Failed to delete user with ID: {}", id);
             return "Invalid user";
         }
     }

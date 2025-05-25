@@ -1,0 +1,69 @@
+[INFO]  :  Starting PrescriptionServiceImplTest using Java 21.0.6 with PID 17696 (started by admin in D:\spring workspace\HospitalManage_SpringRest)
+[INFO]  :  No active profile set, falling back to 1 default profile: "default"
+[INFO]  :  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO]  :  Finished Spring Data repository scanning in 100 ms. Found 8 JPA repository interfaces.
+[INFO]  :  HHH000204: Processing PersistenceUnitInfo [name: default]
+[INFO]  :  HHH000412: Hibernate ORM core version 6.5.3.Final
+[INFO]  :  HHH000026: Second-level cache disabled
+[INFO]  :  No LoadTimeWeaver setup: ignoring JPA class transformer
+[INFO]  :  HikariPool-1 - Starting...
+[INFO]  :  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5a82bc58
+[INFO]  :  HikariPool-1 - Start completed.
+[WARN]  :  HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+[INFO]  :  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO]  :  Initialized JPA EntityManagerFactory for persistence unit 'default'
+[INFO]  :  Hibernate is in classpath; If applicable, HQL parser will be used.
+[WARN]  :  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO]  :  Started PrescriptionServiceImplTest in 8.457 seconds (process running for 9.869)
+[INFO]  :  Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO]  :  HikariPool-1 - Shutdown initiated...
+[INFO]  :  HikariPool-1 - Shutdown completed.
+[INFO]  :  Starting PrescriptionServiceImplTest using Java 21.0.6 with PID 7372 (started by admin in D:\spring workspace\HospitalManage_SpringRest)
+[INFO]  :  No active profile set, falling back to 1 default profile: "default"
+[INFO]  :  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO]  :  Finished Spring Data repository scanning in 100 ms. Found 8 JPA repository interfaces.
+[INFO]  :  HHH000204: Processing PersistenceUnitInfo [name: default]
+[INFO]  :  HHH000412: Hibernate ORM core version 6.5.3.Final
+[INFO]  :  HHH000026: Second-level cache disabled
+[INFO]  :  No LoadTimeWeaver setup: ignoring JPA class transformer
+[INFO]  :  HikariPool-1 - Starting...
+[INFO]  :  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@118fbaf0
+[INFO]  :  HikariPool-1 - Start completed.
+[WARN]  :  HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+[INFO]  :  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO]  :  Initialized JPA EntityManagerFactory for persistence unit 'default'
+[INFO]  :  Hibernate is in classpath; If applicable, HQL parser will be used.
+[WARN]  :  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO]  :  Starting HospitalManageSpringRestApplication using Java 21.0.6 with PID 11428 (D:\spring workspace\HospitalManage_SpringRest\target\classes started by admin in D:\spring workspace\HospitalManage_SpringRest)
+[INFO]  :  No active profile set, falling back to 1 default profile: "default"
+[INFO]  :  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO]  :  Finished Spring Data repository scanning in 76 ms. Found 8 JPA repository interfaces.
+[INFO]  :  Tomcat initialized with port 8080 (http)
+[INFO]  :  Starting service [Tomcat]
+[INFO]  :  Starting Servlet engine: [Apache Tomcat/10.1.40]
+[INFO]  :  Initializing Spring embedded WebApplicationContext
+[INFO]  :  Root WebApplicationContext: initialization completed in 1458 ms
+[INFO]  :  HHH000204: Processing PersistenceUnitInfo [name: default]
+[INFO]  :  HHH000412: Hibernate ORM core version 6.5.3.Final
+[INFO]  :  HHH000026: Second-level cache disabled
+[INFO]  :  No LoadTimeWeaver setup: ignoring JPA class transformer
+[INFO]  :  HikariPool-1 - Starting...
+[INFO]  :  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1029cf9
+[INFO]  :  HikariPool-1 - Start completed.
+[WARN]  :  HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+[INFO]  :  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO]  :  Initialized JPA EntityManagerFactory for persistence unit 'default'
+[INFO]  :  Hibernate is in classpath; If applicable, HQL parser will be used.
+[WARN]  :  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO]  :  Tomcat started on port 8080 (http) with context path '/'
+[INFO]  :  Started HospitalManageSpringRestApplication in 6.365 seconds (process running for 7.292)
+[INFO]  :  Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO]  :  Initializing Servlet 'dispatcherServlet'
+[INFO]  :  Completed initialization in 4 ms
+[INFO]  :  Init duration for springdoc-openapi is: 3558 ms
+[INFO]  :  Fetching all users
+[INFO]  :  Total users fetched: 18
+[INFO]  :  Application shutdown requested.
+[INFO]  :  Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO]  :  HikariPool-1 - Shutdown initiated...
+[INFO]  :  HikariPool-1 - Shutdown completed.
