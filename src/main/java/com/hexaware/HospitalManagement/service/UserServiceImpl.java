@@ -17,20 +17,19 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserRepository userRepo;
 
-    private User convertDtoToEntity(UserDTO dto) {
-        User user = new User();
-        user.setName(dto.getName());
-        user.setEmail(dto.getEmail());
-        user.setPassword(dto.getPassword());
-        user.setRole(dto.getRole());
-        return user;
-    }
-
     @Override
     public User registerUser(UserDTO userDTO) {
-        User user = convertDtoToEntity(userDTO);
+        User user = new User();
+        user.setName(userDTO.getName());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
+        user.setRole(userDTO.getRole());
+        user.setGender(userDTO.getGender());
+        user.setDateOfBirth(userDTO.getDateOfBirth());  
+        user.setContactNumber(userDTO.getContactNumber()); 
         return userRepo.save(user);
     }
+
 
     @Override
     public User getUserById(Long userId) throws UserNotFoundException {
@@ -55,12 +54,19 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User updateUser(Long userId, UserDTO userDTO) throws UserNotFoundException {
-        User existingUser = getUserById(userId);
+        Optional<User> optionalUser = userRepo.findById(userId);
+        if (!optionalUser.isPresent()) {
+            throw new UserNotFoundException("User not found with ID: " + userId);
+        }
+
+        User existingUser = optionalUser.get();
         existingUser.setName(userDTO.getName());
         existingUser.setEmail(userDTO.getEmail());
         existingUser.setPassword(userDTO.getPassword());
         existingUser.setRole(userDTO.getRole());
-        // update other fields as needed
+        existingUser.setGender(userDTO.getGender());
+        existingUser.setDateOfBirth(userDTO.getDateOfBirth());  
+        existingUser.setContactNumber(userDTO.getContactNumber());
         return userRepo.save(existingUser);
     }
 

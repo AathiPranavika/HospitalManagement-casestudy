@@ -66,11 +66,12 @@ public class PrescriptionServiceImpl implements IPrescriptionService {
     }
 
     @Override
-    public void deletePrescription(Long prescriptionId) throws PrescriptionNotFoundException {
+    public boolean deletePrescription(Long prescriptionId) throws PrescriptionNotFoundException {
         if (!prescriptionRepo.existsById(prescriptionId)) {
             throw new PrescriptionNotFoundException("Prescription not found with ID: " + prescriptionId);
         }
         prescriptionRepo.deleteById(prescriptionId);
+        return true;
     }
 
     @Override

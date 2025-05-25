@@ -26,7 +26,7 @@ public interface IAppointmentService {
     
     Appointment completeAppointmentById(Long appointmentId) throws AppointmentNotFoundException;
     
-    Appointment confirmAppointment(AppointmentDTO appointmentDTO, LocalDateTime dateTime) throws AppointmentNotFoundException;
+    Appointment confirmAppointment(Long appointmentId,AppointmentDTO appointmentDTO, LocalDateTime dateTime) throws AppointmentNotFoundException;
 
     List<Appointment> getUpcomingAppointmentsForDoctor(Long doctorId);
 
@@ -37,5 +37,8 @@ public interface IAppointmentService {
     List<Appointment> getAppointmentsByStatus(Appointment.AppointmentStatus status);
 
     List<Appointment> searchAppointmentsByDate(LocalDate date);
+    
+    void deleteAppointmentById(Long id) throws AppointmentNotFoundException;
+
 
 }

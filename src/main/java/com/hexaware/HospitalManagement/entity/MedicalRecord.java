@@ -1,6 +1,8 @@
 package com.hexaware.HospitalManagement.entity;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -12,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -25,7 +28,7 @@ public class MedicalRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long recordId;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "appointmentId", nullable = false,
                 foreignKey = @ForeignKey(name = "fk_medical_record_appointment"))
     @NotNull(message = "Appointment must be specified")
@@ -45,8 +48,14 @@ public class MedicalRecord {
     private String treatmentPlan;
 
     @CreationTimestamp
-    @Column(insertable = false, updatable = false)
+    @Column(updatable = false, insertable = true)
+
     private LocalDateTime createdAt;
+
+    //when a medical record deleted all related prescription will be deleted
+    @OneToMany(mappedBy = "medicalRecord", cascade = CascadeType.ALL)
+    private Set<Prescription> prescriptions = new HashSet<>();
+
 
     // Getters and Setters
 
@@ -101,6 +110,14 @@ public class MedicalRecord {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+
+	public Set<Prescription> getPrescriptions() {
+		return prescriptions;
+	}
+
+	public void setPrescriptions(Set<Prescription> prescriptions) {
+		this.prescriptions = prescriptions;
+	}
 
 	@Override
 	public String toString() {

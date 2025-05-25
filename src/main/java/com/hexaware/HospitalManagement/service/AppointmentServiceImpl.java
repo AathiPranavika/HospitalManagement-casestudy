@@ -120,7 +120,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
     }
 
     @Override
-    public Appointment confirmAppointment(AppointmentDTO dto, LocalDateTime dateTime) throws AppointmentNotFoundException {
+    public Appointment confirmAppointment(Long appointmentId,AppointmentDTO dto, LocalDateTime dateTime) throws AppointmentNotFoundException {
         Appointment appointment = getAppointmentById(dto.getAppointmentId());
         appointment.setStatus(Appointment.AppointmentStatus.CONFIRMED);
         appointment.setAppointmentDate(dateTime);
@@ -153,5 +153,16 @@ public class AppointmentServiceImpl implements IAppointmentService {
         LocalDateTime end = date.plusDays(1).atStartOfDay();
         return appointmentRepo.findByAppointmentDateBetween(start, end);
     }
+    @Override
+    public void deleteAppointmentById(Long id) throws AppointmentNotFoundException {
+        Optional<Appointment> appObj = appointmentRepo.findById(id);
+
+        if (appObj.isEmpty()) {
+            throw new AppointmentNotFoundException("Appointment with ID " + id + " not found.");
+        }
+
+        appointmentRepo.delete(appObj.get());
+    }
+
 
 }

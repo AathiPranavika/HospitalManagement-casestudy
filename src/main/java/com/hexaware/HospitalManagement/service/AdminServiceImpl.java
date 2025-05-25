@@ -1,5 +1,6 @@
 package com.hexaware.HospitalManagement.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,52 +37,47 @@ public class AdminServiceImpl implements IAdminService {
 	
 	@Autowired
 	IUserService userService;
+		
 	@Autowired
     private AdminRepository adminRepo;
 
 	 @Override
-	    public Admin registerAdmin(AdminDTO adminDTO) {
-	        Optional<User> userOpt = userRepo.findById(adminDTO.getUserId());
-	        if (userOpt.isEmpty()) {
-	            throw new UserNotFoundException("User not found with ID: " + adminDTO.getUserId());
-	        }
-
+	    public Admin registerAdmin(AdminDTO adminDTO) throws UserNotFoundException {
+	        User userOpt = userService.getUserById(adminDTO.getUserId());
 	        Admin admin = new Admin();
 	        admin.setAdminCode(adminDTO.getAdminCode());
 	        admin.setDepartment(adminDTO.getDepartment());
 	        admin.setQualification(adminDTO.getQualification());
-	        admin.setUser(userOpt.get());
+	        admin.setUser(userOpt);
 
 	        return adminRepo.save(admin);
 	    }
 
 	    @Override
-	    public Admin updateAdmin(Long adminId, AdminDTO adminDTO) {
+	    public Admin updateAdmin(Long adminId, AdminDTO adminDTO) throws UserNotFoundException {
 	        Optional<Admin> adminOpt = adminRepo.findById(adminId);
 	        if (adminOpt.isEmpty()) {
 	            throw new AdminNotFoundException("Admin not found with ID: " + adminId);
 	        }
 
-	        Optional<User> userOpt = userRepo.findById(adminDTO.getUserId());
-	        if (userOpt.isEmpty()) {
-	            throw new UserNotFoundException("User not found with ID: " + adminDTO.getUserId());
-	        }
-
+	        User userOpt = userService.getUserById(adminDTO.getUserId());
+	        
 	        Admin admin = adminOpt.get();
 	        admin.setAdminCode(adminDTO.getAdminCode());
 	        admin.setDepartment(adminDTO.getDepartment());
 	        admin.setQualification(adminDTO.getQualification());
-	        admin.setUser(userOpt.get());
+	        admin.setUser(userOpt);
 
 	        return adminRepo.save(admin);
 	    }
 
 	    @Override
-	    public void deleteAdmin(Long adminId) {
+	    public boolean deleteAdmin(Long adminId) {
 	        if (!adminRepo.existsById(adminId)) {
 	            throw new AdminNotFoundException("Admin not found with ID: " + adminId);
 	        }
 	        adminRepo.deleteById(adminId);
+			return true;
 	    }
 
 	    @Override
@@ -181,9 +177,34 @@ public class AdminServiceImpl implements IAdminService {
 	}
 
 	@Override
-	public void cancelAppointment(Long appointmentId) throws AppointmentNotFoundException {
-		appointmentService.cancelAppointmentById(appointmentId);	
+	public Appointment cancelAppointment(Long appointmentId) throws AppointmentNotFoundException {
+		return appointmentService.cancelAppointmentById(appointmentId);	
 	}
+	
+	@Override
+	public Appointment rejectAppointmentById(Long appointmentId) throws AppointmentNotFoundException {
+		return appointmentService.rejectAppointmentById(appointmentId);
+		 
+	}
+
+	@Override
+	public Appointment completeAppointmentById(Long appointmentId) throws AppointmentNotFoundException {
+		return appointmentService.completeAppointmentById(appointmentId);
+	}
+
+	@Override
+	public Appointment confirmAppointment(Long id,AppointmentDTO appointmentDTO, LocalDateTime dateTime)
+			throws AppointmentNotFoundException {
+		return appointmentService.confirmAppointment(id,appointmentDTO, dateTime);
+	}
+	
+	@Override
+	public boolean deleteAppointmentById(Long appointmentId) throws AppointmentNotFoundException {
+	    
+	    appointmentService.deleteAppointmentById(appointmentId);
+	    return true;
+	}
+
 	@Override
 	public User addUser(UserDTO userDTO) {
 		return userService.registerUser(userDTO);
@@ -208,6 +229,8 @@ public class AdminServiceImpl implements IAdminService {
 	public List<User> getAllUsers() {
 		return userService.getAllUsers();
 	}
+
+	
 
 	
 

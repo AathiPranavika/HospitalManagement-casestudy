@@ -14,6 +14,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
@@ -51,8 +53,11 @@ public class Appointment {
     @NotNull(message = "Status must be specified")
     private AppointmentStatus status = AppointmentStatus.PENDING;
 
+    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL)
+    private MedicalRecord medicalRecord;
+    
     @CreationTimestamp
-    @Column(insertable = false, updatable = false)
+    @Column(updatable = false, insertable = true)
     private LocalDateTime createdAt;
 
     // Enum for status

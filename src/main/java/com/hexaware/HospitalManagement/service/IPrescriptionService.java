@@ -15,7 +15,7 @@ public interface IPrescriptionService {
 
     Prescription updatePrescription(PrescriptionDTO prescriptionDTO) throws PrescriptionNotFoundException;
 
-    void deletePrescription(Long prescriptionId) throws PrescriptionNotFoundException;
+    boolean deletePrescription(Long prescriptionId) throws PrescriptionNotFoundException;
 
     List<Prescription> getPrescriptionsByPatientId(Long patientId);
 

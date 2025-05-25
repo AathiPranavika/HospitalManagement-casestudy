@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,7 +74,7 @@ public class AppointmentController {
     public Appointment confirmAppointment(@PathVariable Long id,
                                           @RequestBody AppointmentDTO appointmentDTO,
                                           @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime) throws AppointmentNotFoundException {
-        return appointmentService.confirmAppointment(appointmentDTO, dateTime);
+        return appointmentService.confirmAppointment(id,appointmentDTO, dateTime);
     }
 
     @GetMapping("/patient/{patientId}")
@@ -106,4 +107,11 @@ public class AppointmentController {
                                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate date) {
         return appointmentService.searchAppointmentsByDate(date);
     }
+    
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteAppointment(@PathVariable Long id) throws AppointmentNotFoundException {
+        appointmentService.deleteAppointmentById(id);
+        return new ResponseEntity<>("Appointment with ID " + id + " deleted successfully.", HttpStatus.OK);
+    }
+
 }

@@ -1,97 +1,113 @@
 package com.hexaware.HospitalManagement.DTO;
 
-import com.hexaware.HospitalManagement.entity.User;  
 import java.time.LocalDate;
+
+import com.hexaware.HospitalManagement.entity.User;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDTO {
 
-    @NotBlank(message = "Name is required")
-    @Size(min = 3, message = "Name must have minimum 3 characters")
-    private String name;
+	private Long userId;
+	@NotBlank(message = "Name is required")
+	@Size(min = 3, message = "Name must have minimum 3 characters")
+	private String name;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Invalid email format")
-    private String email;
+	@NotBlank(message = "Email is required")
+	@Email(message = "Invalid email format")
+	private String email;
 
-    @NotBlank(message = "Password is required")
-    @Size(min = 6, message = "Password must have minimum 6 characters")
-    private String password;
+	@NotBlank(message = "Password is required")
+	@Size(min = 6, message = "Password must have minimum 6 characters")
+	private String password;
 
-    @NotNull(message = "Role is required")
-    private User.Role role;  
+	@NotNull(message = "Role is required")
+	private User.Role role;
 
-    @Size(max = 10, message = "Gender must be at most 10 characters")
-    @Pattern(regexp = "^(Male|Female|Other)$", message = "Gender must be Male, Female, or Other")
-    private String gender;
+	@Size(max = 10, message = "Gender must be at most 10 characters")
+	@Pattern(regexp = "^(Male|Female|Other)$", message = "Gender must be Male, Female, or Other")
+	private String gender;
 
-    @NotNull(message = "Date of birth is required")
-    @Past(message = "Date of birth must be a past date")
-    private LocalDate dateOfBirth;
+	@NotNull(message = "Date of birth is required")
+	@Past(message = "Date of birth must be a past date")
+	private LocalDate dateOfBirth;
 
-    @NotBlank(message = "Contact number is required")
-    @Pattern(regexp = "\\d{10}", message = "Contact number must have 10 digits")
-    private String contactNumber;
+	@NotBlank(message = "Contact number is required")
+	@Pattern(regexp = "\\d{10}", message = "Contact number must have 10 digits")
+	private String contactNumber;
 
+	public Long getUserId() {
+		return userId;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public User.Role getRole() {
-        return role;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setRole(User.Role role) {
-        this.role = role;
-    }
+	public User.Role getRole() {
+		return role;
+	}
 
-    public String getGender() {
-        return gender;
-    }
+	public void setRole(User.Role role) {
+		this.role = role;
+	}
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+	public String getGender() {
+		return gender;
+	}
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
+	}
 
-    public String getContactNumber() {
-        return contactNumber;
-    }
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
+	public String getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
 }

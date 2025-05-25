@@ -5,9 +5,7 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -68,13 +66,16 @@ public class User {
 	@Column(nullable = false, unique = true, length = 10)
 	private String contactNumber;
 
-	@CreationTimestamp
-	//formating date tym
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	@Column(updatable = false)
-	private LocalDateTime createdAt;
+	 @CreationTimestamp
+	    @Column(updatable = false, insertable = true)
 
+	    private LocalDateTime createdAt;
+
+	 @OneToOne(mappedBy="user", cascade = CascadeType.ALL) 
+	 private Patient patient;
 	
+	 @OneToOne(mappedBy="user", cascade = CascadeType.ALL) 
+	 private Doctor doctor;
 
 	public enum Role {
 		PATIENT, DOCTOR, ADMIN;
@@ -84,6 +85,22 @@ public class User {
 
 	public Long getUserId() {
 		return userId;
+	}
+
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	public Doctor getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
 	}
 
 	public void setUserId(Long userId) {

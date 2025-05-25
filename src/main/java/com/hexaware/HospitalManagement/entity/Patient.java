@@ -26,8 +26,7 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long patientId;
 
-    // Must not be null at the Java level too
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne
     @JoinColumn(
         name = "userId",
         unique = true,
@@ -61,6 +60,17 @@ public class Patient {
     @Column(columnDefinition = "TEXT")
     private String medicalHistory;
 
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private Set<Appointment> appointments = new HashSet<>();
+
+
+	public Set<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(Set<Appointment> appointments) {
+		this.appointments = appointments;
+	}
 
 	public Long getPatientId() {
 		return patientId;

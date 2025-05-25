@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Pattern;
 
 public class PatientDTO {
 
-    @NotNull(message = "User ID is required")
     private Long userId;
 
     private String address;

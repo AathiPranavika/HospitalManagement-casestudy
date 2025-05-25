@@ -37,10 +37,13 @@ public class PrescriptionController {
     }
 
     @DeleteMapping("delete/{id}")
-    public String deletePrescription(@PathVariable Long id)
-            throws PrescriptionNotFoundException {
-        prescriptionService.deletePrescription(id);
-        return "Prescription deleted successfully.";
+    public String deletePrescription(@PathVariable Long id) throws PrescriptionNotFoundException
+            {
+        if(prescriptionService.deletePrescription(id))
+        {
+              return "Prescription deleted successfully.";
+        }
+		return "deletion failed";
     }
 
     @GetMapping("/patient/{patientId}")

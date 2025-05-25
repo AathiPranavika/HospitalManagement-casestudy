@@ -52,7 +52,7 @@ public class Message {
     private String message;
 
     @CreationTimestamp
-    @Column(insertable = false, updatable = false)
+    @Column(insertable = true, updatable = false)
     private LocalDateTime sentAt;
 
     @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")

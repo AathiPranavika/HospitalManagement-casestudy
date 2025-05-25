@@ -1,5 +1,6 @@
 package com.hexaware.HospitalManagement.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.hexaware.HospitalManagement.DTO.AdminDTO;
@@ -38,7 +39,14 @@ public interface IAdminService {
     List<Appointment> getAllAppointments();
     Appointment getAppointmentById(Long appointmentId) throws AppointmentNotFoundException;
     Appointment updateAppointment(Long appointmentId, AppointmentDTO appointmentDTO) throws AppointmentNotFoundException;
-    void cancelAppointment(Long appointmentId) throws AppointmentNotFoundException;
+    Appointment cancelAppointment(Long appointmentId) throws AppointmentNotFoundException;
+    Appointment rejectAppointmentById(Long appointmentId) throws AppointmentNotFoundException;
+    
+    Appointment completeAppointmentById(Long appointmentId) throws AppointmentNotFoundException;
+    
+    Appointment confirmAppointment(Long id,AppointmentDTO appointmentDTO, LocalDateTime dateTime) throws AppointmentNotFoundException;
+	boolean deleteAppointmentById(Long appointmentId) throws AppointmentNotFoundException;
+
 
     User addUser(UserDTO userDTO);
     User updateUser(Long userId, UserDTO userDTO) throws UserNotFoundException;
@@ -46,9 +54,9 @@ public interface IAdminService {
     User getUserById(Long userId) throws UserNotFoundException;
     List<User> getAllUsers();
 
-    Admin registerAdmin(AdminDTO adminDTO);
-    Admin updateAdmin(Long adminId, AdminDTO adminDTO);
-    void deleteAdmin(Long adminId);
+    Admin registerAdmin(AdminDTO adminDTO) throws UserNotFoundException;
+    Admin updateAdmin(Long adminId, AdminDTO adminDTO) throws UserNotFoundException;
+    boolean deleteAdmin(Long adminId);
     List<Admin> getAllAdmins();
     Admin getAdminById(Long adminId);
 }

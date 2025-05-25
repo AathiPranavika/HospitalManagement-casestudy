@@ -1,5 +1,8 @@
 package com.hexaware.HospitalManagement.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
@@ -22,8 +26,7 @@ public class Doctor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long doctorId;
 
-    //.merge->update
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne
     @JoinColumn(
         name = "userId",
         nullable = false,
@@ -51,6 +54,9 @@ public class Doctor {
     @NotBlank(message = "Designation is required")
     @Column(nullable = false, length = 50)
     private String designation;
+
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Appointment> appointments = new HashSet<>();
 
     public Long getDoctorId() {
         return doctorId;
@@ -99,6 +105,15 @@ public class Doctor {
     public void setDesignation(String designation) {
         this.designation = designation;
     }
+    
+
+	public Set<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(Set<Appointment> appointments) {
+		this.appointments = appointments;
+	}
 
 	@Override
 	public String toString() {

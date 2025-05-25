@@ -62,7 +62,6 @@ public class PatientServiceImpl implements IPatientService {
         Optional<Patient> optionalPatient = patientRepository.findById(patientId);
         if (optionalPatient.isPresent()) {
             Patient patient = optionalPatient.get();
-            // Update all fields according to new DTO
             patient.setAddress(dto.getAddress());
             patient.setEmergencyContact(dto.getEmergencyContact());
             patient.setBloodGroup(dto.getBloodGroup());
