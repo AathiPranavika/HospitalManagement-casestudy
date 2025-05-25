@@ -1,0 +1,85 @@
+package com.hexaware.HospitalManagement.service;
+
+import com.hexaware.HospitalManagement.DTO.UserDTO;
+import com.hexaware.HospitalManagement.entity.User;
+import com.hexaware.HospitalManagement.exception.UserNotFoundException;
+import com.hexaware.HospitalManagement.repository.UserRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class UserServiceImpl implements IUserService {
+
+    @Autowired
+    private UserRepository userRepo;
+
+    private User convertDtoToEntity(UserDTO dto) {
+        User user = new User();
+        user.setName(dto.getName());
+        user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
+        user.setRole(dto.getRole());
+        return user;
+    }
+
+    @Override
+    public User registerUser(UserDTO userDTO) {
+        User user = convertDtoToEntity(userDTO);
+        return userRepo.save(user);
+    }
+
+    @Override
+    public User getUserById(Long userId) throws UserNotFoundException {
+        Optional<User> userOpt = userRepo.findById(userId);
+        if (userOpt.isPresent()) {
+            return userOpt.get();
+        } else {
+            throw new UserNotFoundException("User not found with ID: " + userId);
+        }
+    }
+
+    @Override
+    public User getUserByEmail(String email) throws UserNotFoundException {
+        Optional<User> userOpt = userRepo.findByEmail(email);
+        if (userOpt.isPresent()) {
+            return userOpt.get();
+        } else {
+            throw new UserNotFoundException("User not found with email: " + email);
+        }
+    }
+
+
+    @Override
+    public User updateUser(Long userId, UserDTO userDTO) throws UserNotFoundException {
+        User existingUser = getUserById(userId);
+        existingUser.setName(userDTO.getName());
+        existingUser.setEmail(userDTO.getEmail());
+        existingUser.setPassword(userDTO.getPassword());
+        existingUser.setRole(userDTO.getRole());
+        // update other fields as needed
+        return userRepo.save(existingUser);
+    }
+
+    @Override
+    public boolean deleteUser(Long userId) throws UserNotFoundException {
+        if (!userRepo.existsById(userId)) {
+            throw new UserNotFoundException("User not found with ID: " + userId);
+        }
+        userRepo.deleteById(userId);
+        return true;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepo.findAll();
+    }
+
+    @Override
+    public List<User> getUsersByRole(User.Role role) {
+        return userRepo.findByRole(role);
+    }
+}
