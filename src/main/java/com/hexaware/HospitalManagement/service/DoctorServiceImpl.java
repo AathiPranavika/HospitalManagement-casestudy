@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.hexaware.HospitalManagement.DTO.DoctorDTO;
 import com.hexaware.HospitalManagement.DTO.MedicalRecordDTO;
+import com.hexaware.HospitalManagement.DTO.MessageDTO;
 import com.hexaware.HospitalManagement.DTO.PrescriptionDTO;
 import com.hexaware.HospitalManagement.entity.Appointment;
 import com.hexaware.HospitalManagement.entity.Doctor;
@@ -42,6 +43,9 @@ public class DoctorServiceImpl implements IDoctorService {
     
     @Autowired
     IPrescriptionService PrescriptionService;
+    
+    @Autowired
+    IMessageService messageService;
     
     @Override
     public Doctor registerDoctor(DoctorDTO dto) throws UserNotFoundException {
@@ -161,15 +165,31 @@ public class DoctorServiceImpl implements IDoctorService {
     	return PrescriptionService.updatePrescription(prescriptionDTO);
     }
 
+	@Override
+	public Message sendMessage(MessageDTO messageDTO) {
+		return messageService.sendMessage(messageDTO);
+	}
+
+	@Override
+	public List<Message> getMessagesBetweenDoctorAndPatient(int doctorId, int patientId) {
+		return messageService.getMessagesBetweenDoctorAndPatient(doctorId, patientId);
+	}
+
+	@Override
+	public List<Message> getUnreadMessagesForDoctor(int doctorId) {
+		return messageService.getUnreadMessagesForDoctor(doctorId);
+	}
+
+	@Override
+	public boolean markMessageAsRead(int messageId) {
+		return messageService.markMessageAsRead(messageId);
+	}
+
+	@Override
+	public List<Message> getMessagesSentByDoctor(int doctorId) {
+		return messageService.getMessagesSentByDoctor(doctorId);
+	}
+
    
 
-    @Override
-    public boolean sendMessage(Long doctorId, Long patientId, String messageContent) {
-        return false;
-    }
-
-    @Override
-    public List<Message> getMessagesBetweenDoctorAndPatient(Long doctorId, Long patientId) {
-        return null;
-    }
 }

@@ -59,4 +59,5 @@ public interface IAdminService {
     boolean deleteAdmin(Long adminId);
     List<Admin> getAllAdmins();
     Admin getAdminById(Long adminId);
+    
 }

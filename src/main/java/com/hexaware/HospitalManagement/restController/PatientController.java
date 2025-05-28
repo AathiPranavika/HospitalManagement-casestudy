@@ -5,9 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.hexaware.HospitalManagement.DTO.AppointmentDTO;
+import com.hexaware.HospitalManagement.DTO.MessageDTO;
 import com.hexaware.HospitalManagement.DTO.PatientDTO;
 import com.hexaware.HospitalManagement.entity.Appointment;
 import com.hexaware.HospitalManagement.entity.MedicalRecord;
@@ -113,12 +121,6 @@ public class PatientController {
         return patientService.getUpcomingAppointments(id);
     }
 
-    @GetMapping("/messages/{id}")
-    public List<Message> getMessages(@PathVariable Long id) {
-        log.info("Fetching messages for patientId: {}", id);
-        return patientService.getMessagesFromDoctor(id);
-    }
-
     @GetMapping("/medicalRecords/{patientid}")
     public List<MedicalRecord> getMedicalRecords(@PathVariable Long patientid) {
         log.info("Fetching medical records for patientId: {}", patientid);
@@ -136,4 +138,37 @@ public class PatientController {
         log.info("Fetching prescriptions for appointmentId: {}", appointmentId);
         return patientService.getPrescriptionsByAppointmentId(appointmentId);
     }
+    
+
+    @PostMapping("/sendMessage")
+    public Message sendMessage(@RequestBody MessageDTO messageDTO) {
+        log.info("Sending message from patientId: {}", messageDTO.getPatientId());
+        return patientService.sendMessage(messageDTO);
+    }
+
+    @GetMapping("/messages/between/{doctorId}/{patientId}")
+    public List<Message> getMessagesBetweenDoctorAndPatient(@PathVariable int doctorId, @PathVariable int patientId) {
+        log.info("Fetching messages between doctorId: {} and patientId: {}", doctorId, patientId);
+        return patientService.getMessagesBetweenDoctorAndPatient(doctorId, patientId);
+    }
+
+    @GetMapping("/messages/unread/{patientId}")
+    public List<Message> getUnreadMessagesForPatient(@PathVariable int patientId) {
+        log.info("Fetching unread messages for patientId: {}", patientId);
+        return patientService.getUnreadMessagesForPatient(patientId);
+    }
+
+    @PutMapping("/messages/markAsRead/{messageId}")
+    public String markMessageAsRead(@PathVariable int messageId) {
+        log.info("Marking message as read: {}", messageId);
+        boolean updated = patientService.markMessageAsRead(messageId);
+        return updated ? "Message marked as read" : "Message not found or already read";
+    }
+
+    @GetMapping("/messages/sentByPatient/{patientId}")
+    public List<Message> getMessagesSentByPatient(@PathVariable int patientId) {
+        log.info("Fetching messages sent by patientId: {}", patientId);
+        return patientService.getMessagesSentByPatient(patientId);
+    }
+
 }

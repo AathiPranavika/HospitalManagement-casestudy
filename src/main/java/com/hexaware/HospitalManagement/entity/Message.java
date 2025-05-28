@@ -4,7 +4,8 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -29,12 +30,14 @@ public class Message {
     private Long messageId;
 
     @ManyToOne
+    @JsonBackReference //child side
     @JoinColumn(name = "doctorId", nullable = false,
                 foreignKey = @ForeignKey(name = "fk_msg_doctor"))
     @NotNull(message = "Doctor must be specified")
     private Doctor doctor;
 
     @ManyToOne
+    @JsonBackReference //child side
     @JoinColumn(name = "patientId", nullable = false,
                 foreignKey = @ForeignKey(name = "fk_msg_patient"))
     @NotNull(message = "Patient must be specified")

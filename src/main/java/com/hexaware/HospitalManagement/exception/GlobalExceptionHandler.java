@@ -68,6 +68,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> AdminNotFound(AdminNotFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
+    
+    @ExceptionHandler(MessageNotFoundException.class)
+    public ResponseEntity<String> MessageNotFound(MessageNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
 
 }
 

@@ -208,7 +208,7 @@ public class AdminController {
     public User addUser(@Valid @RequestBody UserDTO userDTO) {
         log.info("Adding a new user");
         User user = adminService.addUser(userDTO);
-        log.info("Added user with ID {}", user.getId());
+        log.info("Added user with ID {}", user.getUserId());
         return user;
     }
 

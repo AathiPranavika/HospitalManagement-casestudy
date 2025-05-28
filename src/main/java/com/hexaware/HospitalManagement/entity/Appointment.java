@@ -3,6 +3,8 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,7 +16,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.FutureOrPresent;
@@ -29,12 +30,14 @@ public class Appointment {
     private Long appointmentId;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "patientId", nullable = false,
                 foreignKey = @ForeignKey(name = "fk_appointment_patient"))
     @NotNull(message = "Patient must be specified")
     private Patient patient;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "doctorId", nullable = false,
                 foreignKey = @ForeignKey(name = "fk_appointment_doctor"))
     @NotNull(message = "Doctor must be specified")
@@ -56,7 +59,7 @@ public class Appointment {
     @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL)
     private MedicalRecord medicalRecord;
     
-    @CreationTimestamp
+    @CreationTimestamp //@UpdateTimestamp
     @Column(updatable = false, insertable = true)
     private LocalDateTime createdAt;
 

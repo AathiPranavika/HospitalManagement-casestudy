@@ -3,6 +3,8 @@ package com.hexaware.HospitalManagement.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,7 +32,7 @@ public class Patient {
     @JoinColumn(
         name = "userId",
         unique = true,
-        nullable = false, // DB-level
+        nullable = false, 
         foreignKey = @ForeignKey(name = "fk_patient_user")
     )
     @NotNull(message = "user must be specified")
@@ -61,7 +63,12 @@ public class Patient {
     private String medicalHistory;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+	@JsonManagedReference //parent side
     private Set<Appointment> appointments = new HashSet<>();
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+	@JsonManagedReference //parent side
+	private Set<Message> messages = new HashSet<>();
 
 
 	public Set<Appointment> getAppointments() {

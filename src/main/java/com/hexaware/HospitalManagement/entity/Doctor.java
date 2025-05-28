@@ -3,6 +3,8 @@ package com.hexaware.HospitalManagement.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,94 +20,92 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-@Table(name="doctors")
+@Table(name = "doctors")
 @Entity
 public class Doctor {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long doctorId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long doctorId;
 
-    @OneToOne
-    @JoinColumn(
-        name = "userId",
-        nullable = false,
-        unique = true,
-        foreignKey = @ForeignKey(name = "fk_doctor_user")
-    )
-    @NotNull(message = "User is required")
-    private User user;
+	@OneToOne
+	@JoinColumn(name = "userId", nullable = false, unique = true, foreignKey = @ForeignKey(name = "fk_doctor_user"))
+	@NotNull(message = "User is required")
+	private User user;
 
-    @NotBlank(message = "Specialization is required")
-    @Column(nullable = false, length = 30)
-    private String specialization;
+	@NotBlank(message = "Specialization is required")
+	@Column(nullable = false, length = 30)
+	private String specialization;
 
-    //Java level validation
-    @Min(value = 0, message = "Experience years must be zero or positive")
-    //database level
-    @Column(name = "experience_years",
-           nullable = false, columnDefinition = "INT CHECK (experience_years >= 0)")
-    private int experienceYears;
+	// Java level validation
+	@Min(value = 0, message = "Experience years must be zero or positive")
+	// database level
+	@Column(name = "experience_years", nullable = false, columnDefinition = "INT CHECK (experience_years >= 0)")
+	private int experienceYears;
 
-    @NotBlank(message = "Qualification is required")
-    @Column(nullable = false, length = 50)
-    private String qualification;
+	@NotBlank(message = "Qualification is required")
+	@Column(nullable = false, length = 50)
+	private String qualification;
 
-    @NotBlank(message = "Designation is required")
-    @Column(nullable = false, length = 50)
-    private String designation;
+	@NotBlank(message = "Designation is required")
+	@Column(nullable = false, length = 50)
+	private String designation;
 
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Appointment> appointments = new HashSet<>();
+	@OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private Set<Appointment> appointments = new HashSet<>();
 
-    public Long getDoctorId() {
-        return doctorId;
-    }
+	@OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+	@JsonManagedReference //parent side
+	private Set<Message> messages = new HashSet<>();
 
-    public void setDoctorId(Long doctorId) {
-        this.doctorId = doctorId;
-    }
+	public Long getDoctorId() {
+		return doctorId;
+	}
 
-    public User getUser() {
-        return user;
-    }
+	public void setDoctorId(Long doctorId) {
+		this.doctorId = doctorId;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public String getSpecialization() {
-        return specialization;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
-    }
+	public String getSpecialization() {
+		return specialization;
+	}
 
-    public int getExperienceYears() {
-        return experienceYears;
-    }
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
+	}
 
-    public void setExperienceYears(int experienceYears) {
-        this.experienceYears = experienceYears;
-    }
+	public int getExperienceYears() {
+		return experienceYears;
+	}
 
-    public String getQualification() {
-        return qualification;
-    }
+	public void setExperienceYears(int experienceYears) {
+		this.experienceYears = experienceYears;
+	}
 
-    public void setQualification(String qualification) {
-        this.qualification = qualification;
-    }
+	public String getQualification() {
+		return qualification;
+	}
 
-    public String getDesignation() {
-        return designation;
-    }
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
+	}
 
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
-    
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
 
 	public Set<Appointment> getAppointments() {
 		return appointments;
@@ -121,5 +121,5 @@ public class Doctor {
 				+ ", experienceYears=" + experienceYears + ", qualification=" + qualification + ", designation="
 				+ designation + "]";
 	}
-    
+
 }

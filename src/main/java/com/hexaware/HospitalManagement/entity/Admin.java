@@ -1,5 +1,7 @@
 package com.hexaware.HospitalManagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,6 +37,7 @@ public class Admin {
     @Column(nullable = false, length = 25)
     private String qualification;
 
+    
     @NotNull(message = "User account must be linked")
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "userId", nullable = false,

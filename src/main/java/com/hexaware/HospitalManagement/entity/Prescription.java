@@ -1,6 +1,7 @@
 package com.hexaware.HospitalManagement.entity;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
@@ -21,6 +22,7 @@ public class Prescription {
     private Long prescriptionId;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "recordId", nullable = false,
                 foreignKey = @ForeignKey(name = "fk_prescription_record"))
     @NotNull(message = "Medical record must be specified")

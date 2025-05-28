@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hexaware.HospitalManagement.DTO.AppointmentDTO;
+import com.hexaware.HospitalManagement.DTO.MessageDTO;
 import com.hexaware.HospitalManagement.DTO.PatientDTO;
 import com.hexaware.HospitalManagement.entity.Appointment;
 import com.hexaware.HospitalManagement.entity.MedicalRecord;
@@ -38,6 +39,9 @@ public class PatientServiceImpl implements IPatientService {
    @Autowired
    IPrescriptionService PrescriptionService;
     
+   @Autowired
+   IMessageService messageService;
+   
     @Override
     public Patient registerPatient(PatientDTO dto) throws DuplicatePatientException, UserNotFoundException {
         Optional<Patient> existing = patientRepository.findById(dto.getUserId());
@@ -120,12 +124,6 @@ public class PatientServiceImpl implements IPatientService {
 	}
 
 	@Override
-	public List<Message> getMessagesFromDoctor(Long patientId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<MedicalRecord> getMedicalRecordsByPatientId(Long patientId) {
 		return MedicalRecordService.getMedicalRecordsByPatientId(patientId);
 	}
@@ -139,26 +137,32 @@ public class PatientServiceImpl implements IPatientService {
 	{
 		return PrescriptionService.getPrescriptionsByAppointmentId(appointmentId);
 	}
-   /*
 
-    @Override
-    public boolean sendMessageToDoctor(MessageDTO dto) {
-        Message message = new Message();
-        message.setPatientId(dto.getPatientId());
-        message.setDoctorId(dto.getDoctorId());
-        message.setContent(dto.getContent());
-        message.setTimestamp(dto.getTimestamp());
-        messageRepository.save(message);
-        return true;
-    }
+	@Override
+	public Message sendMessage(MessageDTO messageDTO) {
+		
+		return messageService.sendMessage(messageDTO);
+	}
 
-    @Override
-    public List<Message> getMessagesFromDoctor(Long patientId) {
-        return messageRepository.findByPatientId(patientId);
-    }
+	@Override
+	public List<Message> getMessagesBetweenDoctorAndPatient(int doctorId, int patientId) {
+		return messageService.getMessagesBetweenDoctorAndPatient(doctorId, patientId);
+	}
 
+	@Override
+	public List<Message> getUnreadMessagesForPatient(int patientId) {
+		return messageService.getUnreadMessagesForPatient(patientId);
+	}
+
+	@Override
+	public boolean markMessageAsRead(int messageId) {
+		return messageService.markMessageAsRead(messageId);
+	}
+
+	@Override
+	public List<Message> getMessagesSentByPatient(int patientId) {
+		return messageService.getMessagesSentByPatient(patientId);
+	}
+   
     
-
-    
-    */
 }

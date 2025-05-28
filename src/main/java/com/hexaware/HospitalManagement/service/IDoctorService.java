@@ -1,10 +1,10 @@
 package com.hexaware.HospitalManagement.service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import com.hexaware.HospitalManagement.DTO.DoctorDTO;
 import com.hexaware.HospitalManagement.DTO.MedicalRecordDTO;
+import com.hexaware.HospitalManagement.DTO.MessageDTO;
 import com.hexaware.HospitalManagement.DTO.PrescriptionDTO;
 import com.hexaware.HospitalManagement.entity.Appointment;
 import com.hexaware.HospitalManagement.entity.Doctor;
@@ -54,10 +54,19 @@ public interface IDoctorService {
 	Prescription updatePrescription(PrescriptionDTO updatedPrescription) throws PrescriptionNotFoundException;
 
 
-	// Send message from doctor to patient (MessageRepository)
-	boolean sendMessage(Long doctorId, Long patientId, String messageContent);
+	Message sendMessage(MessageDTO messageDTO);
 
-	// Retrieve chat messages between doctor and patient (MessageRepository)
-	List<Message> getMessagesBetweenDoctorAndPatient(Long doctorId, Long patientId);
+	// 2. Doctor retrieves messages in a conversation with a specific patient
+	List<Message> getMessagesBetweenDoctorAndPatient(int doctorId, int patientId);
+
+	// 3. Doctor checks unread messages received from patients
+	List<Message> getUnreadMessagesForDoctor(int doctorId);
+
+	// 4. Doctor marks a message as read
+	boolean markMessageAsRead(int messageId);
+
+	// 5. Doctor views all messages they have sent
+	List<Message> getMessagesSentByDoctor(int doctorId);
+
 
 }
