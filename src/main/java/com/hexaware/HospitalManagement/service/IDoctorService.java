@@ -10,6 +10,7 @@ import com.hexaware.HospitalManagement.entity.Appointment;
 import com.hexaware.HospitalManagement.entity.Doctor;
 import com.hexaware.HospitalManagement.entity.MedicalRecord;
 import com.hexaware.HospitalManagement.entity.Message;
+import com.hexaware.HospitalManagement.entity.Patient;
 import com.hexaware.HospitalManagement.entity.Prescription;
 import com.hexaware.HospitalManagement.exception.AppointmentNotFoundException;
 import com.hexaware.HospitalManagement.exception.DuplicateDoctorException;
@@ -25,6 +26,8 @@ public interface IDoctorService {
 	Doctor updateDoctor(Long doctorId, DoctorDTO doctorDTO) throws UserNotFoundException;
 
 	boolean deleteDoctor(Long doctorId);
+
+	boolean checkDoctorExistsById(Long doctorId);
 
 	List<Doctor> getDoctorsBySpecialization(String specialization);
 
@@ -56,17 +59,22 @@ public interface IDoctorService {
 
 	Message sendMessage(MessageDTO messageDTO);
 
-	// 2. Doctor retrieves messages in a conversation with a specific patient
 	List<Message> getMessagesBetweenDoctorAndPatient(int doctorId, int patientId);
 
-	// 3. Doctor checks unread messages received from patients
 	List<Message> getUnreadMessagesForDoctor(int doctorId);
 
-	// 4. Doctor marks a message as read
 	boolean markMessageAsRead(int messageId);
 
-	// 5. Doctor views all messages they have sent
 	List<Message> getMessagesSentByDoctor(int doctorId);
+	
+	
+	List<Patient> searchPatientsByName(String name);
+
+    List<Patient> searchPatientsByBloodGroup(String bloodGroup);
+
+	
+
+   
 
 
 }

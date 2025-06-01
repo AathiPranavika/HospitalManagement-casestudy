@@ -48,7 +48,7 @@ public interface IAdminService {
 	boolean deleteAppointmentById(Long appointmentId) throws AppointmentNotFoundException;
 
 
-    User addUser(UserDTO userDTO);
+    String addUser(UserDTO userDTO);
     User updateUser(Long userId, UserDTO userDTO) throws UserNotFoundException;
     void deleteUser(Long userId) throws UserNotFoundException;
     User getUserById(Long userId) throws UserNotFoundException;

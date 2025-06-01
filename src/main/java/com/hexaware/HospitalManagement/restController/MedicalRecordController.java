@@ -13,6 +13,8 @@ import com.hexaware.HospitalManagement.exception.AppointmentNotFoundException;
 import com.hexaware.HospitalManagement.exception.MedicalRecordNotFoundException;
 import com.hexaware.HospitalManagement.service.IMedicalRecordService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/medicalRecords")
 public class MedicalRecordController {
@@ -23,12 +25,12 @@ public class MedicalRecordController {
     private IMedicalRecordService medicalRecordService;
 
     @PostMapping("/create")
-    public MedicalRecord createMedicalRecord(@RequestBody MedicalRecordDTO dto) throws AppointmentNotFoundException {
+    public MedicalRecord createMedicalRecord(@Valid @RequestBody MedicalRecordDTO dto) throws AppointmentNotFoundException {
         logger.info("Creating medical record for appointmentId={}", dto.getAppointmentId());
         return medicalRecordService.createMedicalRecord(dto);
     }
 
-    @GetMapping("/{recordId}")
+    @GetMapping("/getbyid/{recordId}")
     public MedicalRecord getMedicalRecordById(@PathVariable Long recordId) throws MedicalRecordNotFoundException {
         logger.info("Fetching medical record by recordId={}", recordId);
         return medicalRecordService.getMedicalRecordById(recordId);
@@ -53,7 +55,7 @@ public class MedicalRecordController {
     }
 
     @PutMapping("/update")
-    public MedicalRecord updateMedicalRecord(@RequestBody MedicalRecordDTO dto) throws MedicalRecordNotFoundException, AppointmentNotFoundException {
+    public MedicalRecord updateMedicalRecord(@Valid @RequestBody MedicalRecordDTO dto) throws MedicalRecordNotFoundException, AppointmentNotFoundException {
         logger.info("Updating medical record for recordId={}", dto.getRecordId());
         return medicalRecordService.updateMedicalRecord(dto);
     }

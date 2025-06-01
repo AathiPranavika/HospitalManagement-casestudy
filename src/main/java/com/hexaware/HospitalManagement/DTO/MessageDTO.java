@@ -1,35 +1,53 @@
 package com.hexaware.HospitalManagement.DTO;
+import java.time.LocalDateTime;
 
-import com.hexaware.HospitalManagement.entity.Message.SenderRole;
+import com.hexaware.HospitalManagement.enums.SenderRole;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class MessageDTO {
 
     private Long messageId;
 
-    @NotNull(message = "Doctor ID must not be null")
+    @NotNull(message = "Doctor ID cannot be null")
     private Long doctorId;
 
-    @NotNull(message = "Patient ID must not be null")
+    @NotNull(message = "Patient ID cannot be null")
     private Long patientId;
 
-    @NotNull(message = "Sender role must be specified")
+    @NotNull(message = "Sender role must be doctor or patient")
     private SenderRole senderRole;
 
-    @NotBlank(message = "Message content cannot be blank")
+    @NotEmpty(message = "Message cannot be empty")
+    @Size(max = 500, message = "Message cannot exceed 500 characters")
     private String message;
+
+    private LocalDateTime sentAt;
 
     private boolean isRead;
 
+
+    public MessageDTO() {
+    }
+
+    public MessageDTO(Long messageId, Long doctorId, Long patientId, SenderRole senderRole, String message, LocalDateTime sentAt, boolean isRead) {
+        this.messageId = messageId;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
+        this.senderRole = senderRole;
+        this.message = message;
+        this.sentAt = sentAt;
+        this.isRead = isRead;
+    }
 
     public Long getMessageId() {
         return messageId;
     }
 
-    public void setMessageId(Long messageId) {
-        this.messageId = messageId;
+    public void setMessageId(Long id) {
+        this.messageId = id;
     }
 
     public Long getDoctorId() {
@@ -64,17 +82,19 @@ public class MessageDTO {
         this.message = message;
     }
 
+    public LocalDateTime getSentAt() {
+        return sentAt;
+    }
+
+    public void setSentAt(LocalDateTime sentAt) {
+        this.sentAt = sentAt;
+    }
+
     public boolean isRead() {
         return isRead;
     }
 
     public void setRead(boolean isRead) {
         this.isRead = isRead;
-    }
-
-    @Override
-    public String toString() {
-        return "MessageDTO [messageId=" + messageId + ", doctorId=" + doctorId + ", patientId=" + patientId
-                + ", senderRole=" + senderRole + ", message=" + message + ", isRead=" + isRead + "]";
     }
 }

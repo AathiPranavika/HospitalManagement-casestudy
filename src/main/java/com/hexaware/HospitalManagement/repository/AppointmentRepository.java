@@ -20,8 +20,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 	//writing query with fk->first entity name->entity attribute name
 	List<Appointment> findByPatientPatientId(Long patientId);
 	List<Appointment> findByDoctorDoctorId(Long doctorId);
-	List<Appointment> findByDoctorDoctorIdAndAppointmentDateAfter(Long doctorId, LocalDate localDate);
-	List<Appointment> findByPatientPatientIdAndAppointmentDateAfter(Long patientId, LocalDate localDate);
+	List<Appointment> findByDoctorDoctorIdAndAppointmentDateAfter(Long doctorId, LocalDateTime localDate);
+	List<Appointment> findByPatientPatientIdAndAppointmentDateAfter(Long patientId, LocalDateTime localDate);
 	List<Appointment> findByStatus(AppointmentStatus status);
 	List<Appointment> findByAppointmentDateBetween(LocalDateTime start, LocalDateTime end);
 	

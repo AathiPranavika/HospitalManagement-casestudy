@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -34,6 +35,7 @@ public class MedicalRecord {
     @JoinColumn(name = "appointmentId", nullable = false,
                 foreignKey = @ForeignKey(name = "fk_medical_record_appointment"))
     @NotNull(message = "Appointment must be specified")
+    @JsonBackReference
     private Appointment appointment;
 
     @Column(columnDefinition = "TEXT")

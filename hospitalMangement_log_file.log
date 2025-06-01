@@ -1,20 +1,64 @@
-[INFO]  :  Starting MessageServiceImplTest using Java 21.0.6 with PID 18832 (started by admin in D:\spring workspace\HospitalManage_SpringRest)
+[INFO]  :  Starting HospitalManageSpringRestApplication using Java 21.0.6 with PID 1556 (D:\spring workspace\HospitalManage_SpringRest\target\classes started by admin in D:\spring workspace\HospitalManage_SpringRest)
 [INFO]  :  No active profile set, falling back to 1 default profile: "default"
 [INFO]  :  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-[INFO]  :  Finished Spring Data repository scanning in 84 ms. Found 8 JPA repository interfaces.
+[INFO]  :  Finished Spring Data repository scanning in 106 ms. Found 7 JPA repository interfaces.
+[INFO]  :  Tomcat initialized with port 8080 (http)
+[INFO]  :  Starting service [Tomcat]
+[INFO]  :  Starting Servlet engine: [Apache Tomcat/10.1.40]
+[INFO]  :  Initializing Spring embedded WebApplicationContext
+[INFO]  :  Root WebApplicationContext: initialization completed in 3157 ms
 [INFO]  :  HHH000204: Processing PersistenceUnitInfo [name: default]
 [INFO]  :  HHH000412: Hibernate ORM core version 6.5.3.Final
 [INFO]  :  HHH000026: Second-level cache disabled
 [INFO]  :  No LoadTimeWeaver setup: ignoring JPA class transformer
 [INFO]  :  HikariPool-1 - Starting...
-[INFO]  :  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@318e3942
+[INFO]  :  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@647ff23e
 [INFO]  :  HikariPool-1 - Start completed.
 [WARN]  :  HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
 [INFO]  :  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[DEBUG]  :  alter table appointments modify column symptoms TEXT
+[DEBUG]  :  alter table medical_records modify column diagnosis TEXT not null
+[DEBUG]  :  alter table medical_records modify column physical_exam TEXT
+[DEBUG]  :  alter table medical_records modify column symptoms TEXT
+[DEBUG]  :  alter table medical_records modify column treatment_plan TEXT
+[DEBUG]  :  alter table messages modify column message TEXT not null
+[DEBUG]  :  alter table patients modify column address TEXT
+[DEBUG]  :  alter table patients modify column medical_history TEXT
+[DEBUG]  :  alter table prescription modify column remarks TEXT
 [INFO]  :  Initialized JPA EntityManagerFactory for persistence unit 'default'
 [INFO]  :  Hibernate is in classpath; If applicable, HQL parser will be used.
+[INFO]  :  Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+[WARN]  :  Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
 [WARN]  :  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-[INFO]  :  Started MessageServiceImplTest in 13.939 seconds (process running for 25.971)
+[INFO]  :  Tomcat started on port 8080 (http) with context path '/'
+[INFO]  :  Started HospitalManageSpringRestApplication in 12.172 seconds (process running for 13.089)
+[INFO]  :  Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO]  :  Initializing Servlet 'dispatcherServlet'
+[INFO]  :  Completed initialization in 16 ms
+[INFO]  :  Init duration for springdoc-openapi is: 5274 ms
+[DEBUG]  :  insert into users (contact_number,created_at,date_of_birth,email,gender,name,password,role) values (?,?,?,?,?,?,?,?)
+[INFO]  :  Updating user with ID: 42
+[DEBUG]  :  select u1_0.user_id,a1_0.admin_id,a1_0.admin_code,a1_0.department,a1_0.qualification,a1_0.user_id,u1_0.contact_number,u1_0.created_at,u1_0.date_of_birth,d1_0.doctor_id,d1_0.designation,d1_0.experience_years,d1_0.qualification,d1_0.specialization,d1_0.user_id,u1_0.email,u1_0.gender,u1_0.name,u1_0.password,p1_0.patient_id,p1_0.address,p1_0.blood_group,p1_0.emergency_contact,p1_0.medical_history,p1_0.user_id,u1_0.role from users u1_0 left join admins a1_0 on u1_0.user_id=a1_0.user_id left join doctors d1_0 on u1_0.user_id=d1_0.user_id left join patients p1_0 on u1_0.user_id=p1_0.user_id where u1_0.user_id=?
+[DEBUG]  :  update users set contact_number=?,date_of_birth=?,email=?,gender=?,name=?,password=?,role=? where user_id=?
+[INFO]  :  User updated successfully: pranav.doctor@gmail.com
+[DEBUG]  :  select u1_0.user_id,u1_0.contact_number,u1_0.created_at,u1_0.date_of_birth,u1_0.email,u1_0.gender,u1_0.name,u1_0.password,u1_0.role from users u1_0 where u1_0.email=?
+[DEBUG]  :  select a1_0.admin_id,a1_0.admin_code,a1_0.department,a1_0.qualification,a1_0.user_id,u1_0.user_id,u1_0.contact_number,u1_0.created_at,u1_0.date_of_birth,d1_0.doctor_id,d1_0.designation,d1_0.experience_years,d1_0.qualification,d1_0.specialization,d1_0.user_id,u1_0.email,u1_0.gender,u1_0.name,u1_0.password,p1_0.patient_id,p1_0.address,p1_0.blood_group,p1_0.emergency_contact,p1_0.medical_history,p1_0.user_id,u1_0.role from admins a1_0 join users u1_0 on u1_0.user_id=a1_0.user_id left join doctors d1_0 on u1_0.user_id=d1_0.user_id left join patients p1_0 on u1_0.user_id=p1_0.user_id where a1_0.user_id=?
+[DEBUG]  :  select d1_0.doctor_id,d1_0.designation,d1_0.experience_years,d1_0.qualification,d1_0.specialization,d1_0.user_id,u1_0.user_id,a1_0.admin_id,a1_0.admin_code,a1_0.department,a1_0.qualification,a1_0.user_id,u1_0.contact_number,u1_0.created_at,u1_0.date_of_birth,u1_0.email,u1_0.gender,u1_0.name,u1_0.password,p1_0.patient_id,p1_0.address,p1_0.blood_group,p1_0.emergency_contact,p1_0.medical_history,p1_0.user_id,u1_0.role from doctors d1_0 join users u1_0 on u1_0.user_id=d1_0.user_id left join admins a1_0 on u1_0.user_id=a1_0.user_id left join patients p1_0 on u1_0.user_id=p1_0.user_id where d1_0.user_id=?
+[DEBUG]  :  select p1_0.patient_id,p1_0.address,p1_0.blood_group,p1_0.emergency_contact,p1_0.medical_history,p1_0.user_id,u1_0.user_id,a1_0.admin_id,a1_0.admin_code,a1_0.department,a1_0.qualification,a1_0.user_id,u1_0.contact_number,u1_0.created_at,u1_0.date_of_birth,d1_0.doctor_id,d1_0.designation,d1_0.experience_years,d1_0.qualification,d1_0.specialization,d1_0.user_id,u1_0.email,u1_0.gender,u1_0.name,u1_0.password,u1_0.role from patients p1_0 join users u1_0 on u1_0.user_id=p1_0.user_id left join admins a1_0 on u1_0.user_id=a1_0.user_id left join doctors d1_0 on u1_0.user_id=d1_0.user_id where p1_0.user_id=?
+[DEBUG]  :  select u1_0.user_id,u1_0.contact_number,u1_0.created_at,u1_0.date_of_birth,u1_0.email,u1_0.gender,u1_0.name,u1_0.password,u1_0.role from users u1_0 where u1_0.email=?
+[INFO]  :  Token : eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiRE9DVE9SIiwic3ViIjoicHJhbmF2LmRvY3RvckBnbWFpbC5jb20iLCJpYXQiOjE3NDg4MDM0NDUsImV4cCI6MTc0ODg4OTg0NX0.aSF9giJRwM968YjGpKu3Web7AGKp2XShzkOMB0KmY9A
+[DEBUG]  :  select u1_0.user_id,u1_0.contact_number,u1_0.created_at,u1_0.date_of_birth,u1_0.email,u1_0.gender,u1_0.name,u1_0.password,u1_0.role from users u1_0 where u1_0.email=?
+[DEBUG]  :  select a1_0.admin_id,a1_0.admin_code,a1_0.department,a1_0.qualification,a1_0.user_id,u1_0.user_id,u1_0.contact_number,u1_0.created_at,u1_0.date_of_birth,d1_0.doctor_id,d1_0.designation,d1_0.experience_years,d1_0.qualification,d1_0.specialization,d1_0.user_id,u1_0.email,u1_0.gender,u1_0.name,u1_0.password,p1_0.patient_id,p1_0.address,p1_0.blood_group,p1_0.emergency_contact,p1_0.medical_history,p1_0.user_id,u1_0.role from admins a1_0 join users u1_0 on u1_0.user_id=a1_0.user_id left join doctors d1_0 on u1_0.user_id=d1_0.user_id left join patients p1_0 on u1_0.user_id=p1_0.user_id where a1_0.user_id=?
+[DEBUG]  :  select d1_0.doctor_id,d1_0.designation,d1_0.experience_years,d1_0.qualification,d1_0.specialization,d1_0.user_id,u1_0.user_id,a1_0.admin_id,a1_0.admin_code,a1_0.department,a1_0.qualification,a1_0.user_id,u1_0.contact_number,u1_0.created_at,u1_0.date_of_birth,u1_0.email,u1_0.gender,u1_0.name,u1_0.password,p1_0.patient_id,p1_0.address,p1_0.blood_group,p1_0.emergency_contact,p1_0.medical_history,p1_0.user_id,u1_0.role from doctors d1_0 join users u1_0 on u1_0.user_id=d1_0.user_id left join admins a1_0 on u1_0.user_id=a1_0.user_id left join patients p1_0 on u1_0.user_id=p1_0.user_id where d1_0.user_id=?
+[DEBUG]  :  select p1_0.patient_id,p1_0.address,p1_0.blood_group,p1_0.emergency_contact,p1_0.medical_history,p1_0.user_id,u1_0.user_id,a1_0.admin_id,a1_0.admin_code,a1_0.department,a1_0.qualification,a1_0.user_id,u1_0.contact_number,u1_0.created_at,u1_0.date_of_birth,d1_0.doctor_id,d1_0.designation,d1_0.experience_years,d1_0.qualification,d1_0.specialization,d1_0.user_id,u1_0.email,u1_0.gender,u1_0.name,u1_0.password,u1_0.role from patients p1_0 join users u1_0 on u1_0.user_id=p1_0.user_id left join admins a1_0 on u1_0.user_id=a1_0.user_id left join doctors d1_0 on u1_0.user_id=d1_0.user_id where p1_0.user_id=?
+[DEBUG]  :  select u1_0.user_id,u1_0.contact_number,u1_0.created_at,u1_0.date_of_birth,u1_0.email,u1_0.gender,u1_0.name,u1_0.password,u1_0.role from users u1_0 where u1_0.email=?
+[DEBUG]  :  select a1_0.admin_id,a1_0.admin_code,a1_0.department,a1_0.qualification,a1_0.user_id,u1_0.user_id,u1_0.contact_number,u1_0.created_at,u1_0.date_of_birth,d1_0.doctor_id,d1_0.designation,d1_0.experience_years,d1_0.qualification,d1_0.specialization,d1_0.user_id,u1_0.email,u1_0.gender,u1_0.name,u1_0.password,p1_0.patient_id,p1_0.address,p1_0.blood_group,p1_0.emergency_contact,p1_0.medical_history,p1_0.user_id,u1_0.role from admins a1_0 join users u1_0 on u1_0.user_id=a1_0.user_id left join doctors d1_0 on u1_0.user_id=d1_0.user_id left join patients p1_0 on u1_0.user_id=p1_0.user_id where a1_0.user_id=?
+[DEBUG]  :  select d1_0.doctor_id,d1_0.designation,d1_0.experience_years,d1_0.qualification,d1_0.specialization,d1_0.user_id,u1_0.user_id,a1_0.admin_id,a1_0.admin_code,a1_0.department,a1_0.qualification,a1_0.user_id,u1_0.contact_number,u1_0.created_at,u1_0.date_of_birth,u1_0.email,u1_0.gender,u1_0.name,u1_0.password,p1_0.patient_id,p1_0.address,p1_0.blood_group,p1_0.emergency_contact,p1_0.medical_history,p1_0.user_id,u1_0.role from doctors d1_0 join users u1_0 on u1_0.user_id=d1_0.user_id left join admins a1_0 on u1_0.user_id=a1_0.user_id left join patients p1_0 on u1_0.user_id=p1_0.user_id where d1_0.user_id=?
+[DEBUG]  :  select p1_0.patient_id,p1_0.address,p1_0.blood_group,p1_0.emergency_contact,p1_0.medical_history,p1_0.user_id,u1_0.user_id,a1_0.admin_id,a1_0.admin_code,a1_0.department,a1_0.qualification,a1_0.user_id,u1_0.contact_number,u1_0.created_at,u1_0.date_of_birth,d1_0.doctor_id,d1_0.designation,d1_0.experience_years,d1_0.qualification,d1_0.specialization,d1_0.user_id,u1_0.email,u1_0.gender,u1_0.name,u1_0.password,u1_0.role from patients p1_0 join users u1_0 on u1_0.user_id=p1_0.user_id left join admins a1_0 on u1_0.user_id=a1_0.user_id left join doctors d1_0 on u1_0.user_id=d1_0.user_id where p1_0.user_id=?
+[DEBUG]  :  select u1_0.user_id,a1_0.admin_id,a1_0.admin_code,a1_0.department,a1_0.qualification,a1_0.user_id,u1_0.contact_number,u1_0.created_at,u1_0.date_of_birth,d1_0.doctor_id,d1_0.designation,d1_0.experience_years,d1_0.qualification,d1_0.specialization,d1_0.user_id,u1_0.email,u1_0.gender,u1_0.name,u1_0.password,p1_0.patient_id,p1_0.address,p1_0.blood_group,p1_0.emergency_contact,p1_0.medical_history,p1_0.user_id,u1_0.role from users u1_0 left join admins a1_0 on u1_0.user_id=a1_0.user_id left join doctors d1_0 on u1_0.user_id=d1_0.user_id left join patients p1_0 on u1_0.user_id=p1_0.user_id where u1_0.user_id=?
+[DEBUG]  :  select d1_0.doctor_id,d1_0.designation,d1_0.experience_years,d1_0.qualification,d1_0.specialization,d1_0.user_id,u1_0.user_id,a1_0.admin_id,a1_0.admin_code,a1_0.department,a1_0.qualification,a1_0.user_id,u1_0.contact_number,u1_0.created_at,u1_0.date_of_birth,u1_0.email,u1_0.gender,u1_0.name,u1_0.password,p1_0.patient_id,p1_0.address,p1_0.blood_group,p1_0.emergency_contact,p1_0.medical_history,p1_0.user_id,u1_0.role from doctors d1_0 join users u1_0 on u1_0.user_id=d1_0.user_id left join admins a1_0 on u1_0.user_id=a1_0.user_id left join patients p1_0 on u1_0.user_id=p1_0.user_id where d1_0.doctor_id=?
+[DEBUG]  :  insert into doctors (designation,experience_years,qualification,specialization,user_id) values (?,?,?,?,?)
+[INFO]  :  Application shutdown requested.
 [INFO]  :  Closing JPA EntityManagerFactory for persistence unit 'default'
 [INFO]  :  HikariPool-1 - Shutdown initiated...
 [INFO]  :  HikariPool-1 - Shutdown completed.

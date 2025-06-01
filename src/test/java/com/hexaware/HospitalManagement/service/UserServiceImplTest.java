@@ -48,7 +48,7 @@ class UserServiceImplTest {
 		dto.setGender("Male");
 		dto.setDateOfBirth(LocalDate.of(1990, 1, 1));
 		dto.setContactNumber("9999999999");
-		User user=userService.registerUser(dto);
+		String user=userService.registerUser(dto);
 		
 		assertNotNull(user);
 		

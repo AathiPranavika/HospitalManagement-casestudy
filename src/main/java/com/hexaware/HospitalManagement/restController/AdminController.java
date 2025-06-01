@@ -28,7 +28,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api/admins")
 @Slf4j
 public class AdminController {
 
@@ -56,10 +56,12 @@ public class AdminController {
     }
 
     @DeleteMapping("/doctor/delete/{id}")
-    public void deleteDoctor(@PathVariable("id") Long doctorId) {
+    public String deleteDoctor(@PathVariable("id") Long doctorId) {
         log.info("Deleting doctor with ID {}", doctorId);
         adminService.deleteDoctor(doctorId);
         log.info("Deleted doctor with ID {}", doctorId);
+        return "doctor deleted successfully";
+
     }
 
     @GetMapping("/doctors/getall")
@@ -107,10 +109,12 @@ public class AdminController {
     }
 
     @DeleteMapping("/patient/delete/{id}")
-    public void deletePatient(@PathVariable("id") Long patientId) {
+    public String deletePatient(@PathVariable("id") Long patientId) {
         log.info("Deleting patient with ID {}", patientId);
         adminService.deletePatient(patientId);
         log.info("Deleted patient with ID {}", patientId);
+        return "patient deleted successfully";
+
     }
 
     @GetMapping("/patients/getAll")
@@ -156,29 +160,30 @@ public class AdminController {
     }
 
     @DeleteMapping("/appointment/cancel/{id}")
-    public void cancelAppointment(@PathVariable("id") Long appointmentId) throws AppointmentNotFoundException {
+    public String cancelAppointment(@PathVariable("id") Long appointmentId) throws AppointmentNotFoundException {
         log.info("Cancelling appointment with ID {}", appointmentId);
         adminService.cancelAppointment(appointmentId);
         log.info("Cancelled appointment with ID {}", appointmentId);
+        return "appointment cancelled successfully";
     }
 
-    @PutMapping("/reject/{id}")
-    public Appointment rejectAppointment(@PathVariable Long id) throws AppointmentNotFoundException {
+    @PutMapping("/appointment/reject/{id}")
+    public String rejectAppointment(@PathVariable Long id) throws AppointmentNotFoundException {
         log.info("Rejecting appointment with ID {}", id);
         Appointment rejected = adminService.rejectAppointmentById(id);
         log.info("Rejected appointment with ID {}", id);
-        return rejected;
+        return "appointment rejected successfully";
     }
 
-    @PutMapping("/complete/{id}")
-    public Appointment completeAppointment(@PathVariable Long id) throws AppointmentNotFoundException {
+    @PutMapping("/appointment/complete/{id}")
+    public String completeAppointment(@PathVariable Long id) throws AppointmentNotFoundException {
         log.info("Completing appointment with ID {}", id);
         Appointment completed = adminService.completeAppointmentById(id);
         log.info("Completed appointment with ID {}", id);
-        return completed;
+        return "appointment completed successfully";
     }
 
-    @PutMapping("/confirm/{id}/{dateTime}")
+    @PutMapping("/appointment/confirm/{id}/{dateTime}")
     public Appointment confirmAppointment(
             @PathVariable Long id,
             @RequestBody AppointmentDTO appointmentDTO,
@@ -195,7 +200,7 @@ public class AdminController {
         boolean deleted = adminService.deleteAppointmentById(appointmentId);
         if (deleted) {
             log.info("Deleted appointment with ID {}", appointmentId);
-            return "admin deleted successfully";
+            return "appointment deleted successfully";
         }
         log.warn("Failed to delete appointment with ID {}", appointmentId);
         return "deletion failed";
@@ -205,11 +210,10 @@ public class AdminController {
     // User APIs
 
     @PostMapping("/user/add")
-    public User addUser(@Valid @RequestBody UserDTO userDTO) {
+    public String addUser(@Valid @RequestBody UserDTO userDTO) {
         log.info("Adding a new user");
-        User user = adminService.addUser(userDTO);
-        log.info("Added user with ID {}", user.getUserId());
-        return user;
+        String registered = adminService.addUser(userDTO);
+        return registered;
     }
 
     @PutMapping("/user/update/{id}")
@@ -221,10 +225,11 @@ public class AdminController {
     }
 
     @DeleteMapping("/user/delete/{id}")
-    public void deleteUser(@PathVariable("id") Long userId) throws UserNotFoundException {
+    public String deleteUser(@PathVariable("id") Long userId) throws UserNotFoundException {
         log.info("Deleting user with ID {}", userId);
         adminService.deleteUser(userId);
         log.info("Deleted user with ID {}", userId);
+        return "user deleted successfully";
     }
 
     @GetMapping("/user/getById/{id}")
@@ -250,7 +255,7 @@ public class AdminController {
         return admin;
     }
 
-    @PutMapping("/admin/update/{id}")
+    @PutMapping("/update/{id}")
     public Admin updateAdmin(@PathVariable("id") Long adminId, @Valid @RequestBody AdminDTO adminDTO) throws UserNotFoundException {
         log.info("Updating admin with ID {}", adminId);
         Admin updatedAdmin = adminService.updateAdmin(adminId, adminDTO);
@@ -258,20 +263,22 @@ public class AdminController {
         return updatedAdmin;
     }
 
-    @DeleteMapping("/admin/delete/{id}")
-    public void deleteAdmin(@PathVariable("id") Long adminId) {
+    @DeleteMapping("/delete/{id}")
+    public String deleteAdmin(@PathVariable("id") Long adminId) {
         log.info("Deleting admin with ID {}", adminId);
         adminService.deleteAdmin(adminId);
         log.info("Deleted admin with ID {}", adminId);
+        return "admin deleted successfully";
+
     }
 
-    @GetMapping("/admins/getAll")
+    @GetMapping("/getAll")
     public List<Admin> getAllAdmins() {
         log.info("Fetching all admins");
         return adminService.getAllAdmins();
     }
 
-    @GetMapping("/admin/getById/{id}")
+    @GetMapping("/getById/{id}")
     public Admin getAdminById(@PathVariable("id") Long adminId) {
         log.info("Fetching admin by ID {}", adminId);
         return adminService.getAdminById(adminId);

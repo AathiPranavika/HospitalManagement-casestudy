@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -56,9 +57,11 @@ public class Appointment {
     @NotNull(message = "Status must be specified")
     private AppointmentStatus status = AppointmentStatus.PENDING;
 
-    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL)
-    private MedicalRecord medicalRecord;
     
+    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private MedicalRecord medicalRecord;
+
     @CreationTimestamp //@UpdateTimestamp
     @Column(updatable = false, insertable = true)
     private LocalDateTime createdAt;

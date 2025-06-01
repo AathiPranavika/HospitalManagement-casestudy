@@ -1,5 +1,7 @@
 package com.hexaware.HospitalManagement.exception;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,12 +35,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>("duplicate patient exception", HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleGeneric(Exception ex) {
-        return new ResponseEntity<>("Internal Server Error: " + ex.getMessage(),
-                HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-    
+	/*
+	 * @ExceptionHandler(Exception.class) public ResponseEntity<String>
+	 * handleGeneric(Exception ex) { return new
+	 * ResponseEntity<>("Internal Server Error: " + ex.getMessage(),
+	 * HttpStatus.INTERNAL_SERVER_ERROR); }
+	 */
     @ExceptionHandler(AppointmentNotFoundException.class)
     public ResponseEntity<String> handleNotFound(AppointmentNotFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
@@ -69,10 +71,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
     
-    @ExceptionHandler(MessageNotFoundException.class)
-    public ResponseEntity<String> MessageNotFound(MessageNotFoundException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException ex) {
+        return new ResponseEntity<>("Resource not found: " + ex.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(SecurityException.class)
+    public ResponseEntity<String> handleSecurityException(SecurityException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.FORBIDDEN);
+    }
+
 
 }
 

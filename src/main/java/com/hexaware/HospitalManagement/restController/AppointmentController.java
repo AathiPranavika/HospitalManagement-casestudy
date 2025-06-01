@@ -15,6 +15,7 @@ import com.hexaware.HospitalManagement.entity.Appointment;
 import com.hexaware.HospitalManagement.exception.AppointmentNotFoundException;
 import com.hexaware.HospitalManagement.service.IAppointmentService;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -26,7 +27,7 @@ public class AppointmentController {
     private IAppointmentService appointmentService;
 
     @PostMapping("/book")
-    public ResponseEntity<Appointment> bookAppointment(@RequestBody AppointmentDTO appointmentDTO) throws AppointmentNotFoundException {
+    public ResponseEntity<Appointment> bookAppointment(@Valid @RequestBody AppointmentDTO appointmentDTO) throws AppointmentNotFoundException {
         log.info("Booking appointment for patientId: {} with doctorId: {}", appointmentDTO.getPatientId(), appointmentDTO.getDoctorId());
         Appointment savedAppointment = appointmentService.bookAppointment(appointmentDTO);
         log.info("Appointment booked successfully with id: {}", savedAppointment.getAppointmentId());
@@ -49,7 +50,7 @@ public class AppointmentController {
 
     @PutMapping("/update/{id}")
     public Appointment updateAppointment(@PathVariable Long id,
-                                         @RequestBody AppointmentDTO appointmentDTO) throws AppointmentNotFoundException {
+    		@Valid @RequestBody AppointmentDTO appointmentDTO) throws AppointmentNotFoundException {
         log.info("Updating appointment id: {}", id);
         return appointmentService.updateAppointment(id, appointmentDTO);
     }

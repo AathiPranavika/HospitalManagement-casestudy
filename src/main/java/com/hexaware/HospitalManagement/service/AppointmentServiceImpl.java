@@ -129,12 +129,12 @@ public class AppointmentServiceImpl implements IAppointmentService {
 
     @Override
     public List<Appointment> getUpcomingAppointmentsForDoctor(Long doctorId) {
-        return appointmentRepo.findByDoctorDoctorIdAndAppointmentDateAfter(doctorId, LocalDate.now());
+        return appointmentRepo.findByDoctorDoctorIdAndAppointmentDateAfter(doctorId, LocalDateTime.now());
     }
 
     @Override
     public List<Appointment> getUpcomingAppointmentsForPatient(Long patientId) {
-        return appointmentRepo.findByPatientPatientIdAndAppointmentDateAfter(patientId, LocalDate.now());
+        return appointmentRepo.findByPatientPatientIdAndAppointmentDateAfter(patientId, LocalDateTime.now());
     }
 
     @Override

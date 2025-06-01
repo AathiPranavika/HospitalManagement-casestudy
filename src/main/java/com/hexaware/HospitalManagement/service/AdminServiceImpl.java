@@ -41,17 +41,29 @@ public class AdminServiceImpl implements IAdminService {
 	@Autowired
     private AdminRepository adminRepo;
 
-	 @Override
-	    public Admin registerAdmin(AdminDTO adminDTO) throws UserNotFoundException {
-	        User userOpt = userService.getUserById(adminDTO.getUserId());
-	        Admin admin = new Admin();
-	        admin.setAdminCode(adminDTO.getAdminCode());
-	        admin.setDepartment(adminDTO.getDepartment());
-	        admin.setQualification(adminDTO.getQualification());
-	        admin.setUser(userOpt);
-
-	        return adminRepo.save(admin);
+	@Override
+	public Admin registerAdmin(AdminDTO adminDTO) throws UserNotFoundException {
+	    Optional<Admin> existing = adminRepo.findById(adminDTO.getUserId());
+	    if (existing.isPresent()) {
+	        throw new IllegalArgumentException("Admin with this userId already exists");
 	    }
+
+	    User userOpt = userService.getUserById(adminDTO.getUserId());
+	    User user = userOpt;
+
+	    if (user.getRole() != User.Role.ADMIN) {
+	        throw new IllegalArgumentException("User role is not ADMIN");
+	    }
+
+	    Admin admin = new Admin();
+	    admin.setAdminCode(adminDTO.getAdminCode());
+	    admin.setDepartment(adminDTO.getDepartment());
+	    admin.setQualification(adminDTO.getQualification());
+	    admin.setUser(user);
+
+	    return adminRepo.save(admin);
+	}
+
 
 	    @Override
 	    public Admin updateAdmin(Long adminId, AdminDTO adminDTO) throws UserNotFoundException {
@@ -206,7 +218,7 @@ public class AdminServiceImpl implements IAdminService {
 	}
 
 	@Override
-	public User addUser(UserDTO userDTO) {
+	public String addUser(UserDTO userDTO) {
 		return userService.registerUser(userDTO);
 	}
 

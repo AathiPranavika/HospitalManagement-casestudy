@@ -1,15 +1,16 @@
 package com.hexaware.HospitalManagement.service;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import com.hexaware.HospitalManagement.DTO.UserDTO;
 import com.hexaware.HospitalManagement.entity.User;
 import com.hexaware.HospitalManagement.exception.UserNotFoundException;
 import com.hexaware.HospitalManagement.repository.UserRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -17,17 +18,21 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserRepository userRepo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    
     @Override
-    public User registerUser(UserDTO userDTO) {
+    public String registerUser(UserDTO userDTO) {
         User user = new User();
         user.setName(userDTO.getName());
         user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setRole(userDTO.getRole());
         user.setGender(userDTO.getGender());
         user.setDateOfBirth(userDTO.getDateOfBirth());  
         user.setContactNumber(userDTO.getContactNumber()); 
-        return userRepo.save(user);
+        userRepo.save(user);
+        return "User registered successfully with user Id:"+user.getUserId();
     }
 
 
@@ -62,7 +67,7 @@ public class UserServiceImpl implements IUserService {
         User existingUser = optionalUser.get();
         existingUser.setName(userDTO.getName());
         existingUser.setEmail(userDTO.getEmail());
-        existingUser.setPassword(userDTO.getPassword());
+        existingUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         existingUser.setRole(userDTO.getRole());
         existingUser.setGender(userDTO.getGender());
         existingUser.setDateOfBirth(userDTO.getDateOfBirth());  

@@ -14,7 +14,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 @Slf4j
 public class UserController {
 
@@ -53,12 +53,11 @@ public class UserController {
         return user;
     }
 
-    @PostMapping("/add")
-    public User addUser(@Valid @RequestBody UserDTO userDTO) {
+    //@PostMapping("/register user")
+    public String addUser(@Valid @RequestBody UserDTO userDTO) {
         log.info("Registering new user with email: {}", userDTO.getEmail());
-        User user = userService.registerUser(userDTO);
-        log.info("User registered successfully with ID: {}", user.getUserId());
-        return user;
+        String registration = userService.registerUser(userDTO);
+        return registration;
     }
 
     @PutMapping("/update/{id}")

@@ -3,6 +3,7 @@ package com.hexaware.HospitalManagement.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -36,6 +37,7 @@ public class Patient {
         foreignKey = @ForeignKey(name = "fk_patient_user")
     )
     @NotNull(message = "user must be specified")
+    @JsonBackReference
     private User user;
 
     @Column(columnDefinition = "TEXT")
@@ -65,11 +67,7 @@ public class Patient {
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
 	@JsonManagedReference //parent side
     private Set<Appointment> appointments = new HashSet<>();
-
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-	@JsonManagedReference //parent side
-	private Set<Message> messages = new HashSet<>();
-
+	
 
 	public Set<Appointment> getAppointments() {
 		return appointments;

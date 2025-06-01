@@ -25,5 +25,8 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 	@Query("select d from Doctor d where d.user.name=:name")
 	List<Doctor> searchDoctorsByName(@Param("name") String name);
 
+	boolean existsByDoctorIdAndUserUserId(Long doctorId, Long userId);
 	
+
+
 }

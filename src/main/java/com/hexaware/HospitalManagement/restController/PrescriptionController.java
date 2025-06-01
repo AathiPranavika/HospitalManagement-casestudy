@@ -11,6 +11,7 @@ import com.hexaware.HospitalManagement.exception.MedicalRecordNotFoundException;
 import com.hexaware.HospitalManagement.exception.PrescriptionNotFoundException;
 import com.hexaware.HospitalManagement.service.IPrescriptionService;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -22,7 +23,7 @@ public class PrescriptionController {
     private IPrescriptionService prescriptionService;
 
     @PostMapping("/add")
-    public Prescription createPrescription(@RequestBody PrescriptionDTO dto)
+    public Prescription createPrescription(@Valid @RequestBody PrescriptionDTO dto)
             throws MedicalRecordNotFoundException {
         log.info("Creating new prescription for medicalRecordId: {}", dto.getMedicalRecordId());
         return prescriptionService.createPrescription(dto);
@@ -36,7 +37,7 @@ public class PrescriptionController {
     }
 
     @PutMapping("/update")
-    public Prescription updatePrescription(@RequestBody PrescriptionDTO dto)
+    public Prescription updatePrescription(@Valid @RequestBody PrescriptionDTO dto)
             throws PrescriptionNotFoundException {
         log.info("Updating prescription with ID: {}", dto.getPrescriptionId());
         return prescriptionService.updatePrescription(dto);

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IUserService {
 
-    User registerUser(UserDTO userDTO);
+    String registerUser(UserDTO userDTO);
 
     User getUserById(Long userId) throws UserNotFoundException;
 
@@ -21,4 +21,6 @@ public interface IUserService {
     List<User> getAllUsers();
 
     List<User> getUsersByRole(User.Role role);
+    
+
 }

@@ -39,6 +39,9 @@ public class MedicalRecordServiceImpl implements IMedicalRecordService {
         medicalRecord.setPhysicalExam(dto.getPhysicalExam());
         medicalRecord.setDiagnosis(dto.getDiagnosis());
         medicalRecord.setTreatmentPlan(dto.getTreatmentPlan());
+        System.out.println("Appointment ID: " + appointment.getAppointmentId());
+        System.out.println("Appointment object: " + appointment);
+        System.out.println("MedicalRecord object: " + medicalRecord);
 
         return medicalRecordRepository.save(medicalRecord);
     }

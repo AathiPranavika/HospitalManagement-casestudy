@@ -4,54 +4,35 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
-@Table(name="messages")
 @Entity
+@Table(name = "messages")
 public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long messageId;
 
-    @ManyToOne
-    @JsonBackReference //child side
-    @JoinColumn(name = "doctorId", nullable = false,
-                foreignKey = @ForeignKey(name = "fk_msg_doctor"))
-    @NotNull(message = "Doctor must be specified")
-    private Doctor doctor;
+    @Column(nullable = false)
+    private Long doctorId;
 
-    @ManyToOne
-    @JsonBackReference //child side
-    @JoinColumn(name = "patientId", nullable = false,
-                foreignKey = @ForeignKey(name = "fk_msg_patient"))
-    @NotNull(message = "Patient must be specified")
-    private Patient patient;
+    @Column(nullable = false)
+    private Long patientId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false,
             columnDefinition = "ENUM('DOCTOR', 'PATIENT')")
-    @NotNull(message = "Sender role must be specified")
     private SenderRole senderRole;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    @NotBlank(message = "Message content cannot be blank")
-    @Size(max = 200, message = "Message must be at most 200 characters")
     private String message;
 
     @CreationTimestamp
@@ -65,70 +46,77 @@ public class Message {
         DOCTOR, PATIENT
     }
 
-    // Getters and Setters
-
-    public Long getMessageId() {
-        return messageId;
+    public Message()
+    {
+    	
     }
-
-    public void setMessageId(Long messageId) {
-        this.messageId = messageId;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
-
-    public SenderRole getSenderRole() {
-        return senderRole;
-    }
-
-    public void setSenderRole(SenderRole senderRole) {
-        this.senderRole = senderRole;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public LocalDateTime getSentAt() {
-        return sentAt;
-    }
-
-    public void setSentAt(LocalDateTime sentAt) {
-        this.sentAt = sentAt;
-    }
-
-    public boolean isRead() {
-        return isRead;
-    }
-
-    public void setRead(boolean read) {
-        isRead = read;
-    }
-
-	@Override
-	public String toString() {
-		return "Message [messageId=" + messageId + ", doctor=" + doctor + ", patient=" + patient + ", senderRole="
-				+ senderRole + ", message=" + message + ", sentAt=" + sentAt + ", isRead=" + isRead + "]";
+	public Message(Long messageId, Long doctorId, Long patientId, SenderRole senderRole, String message,
+			LocalDateTime sentAt, boolean isRead) {
+		super();
+		this.messageId = messageId;
+		this.doctorId = doctorId;
+		this.patientId = patientId;
+		this.senderRole = senderRole;
+		this.message = message;
+		this.sentAt = sentAt;
+		this.isRead = isRead;
 	}
-    
-    
+
+	public Long getMessageId() {
+		return messageId;
+	}
+
+	public void setMessageId(Long messageId) {
+		this.messageId = messageId;
+	}
+
+	public Long getDoctorId() {
+		return doctorId;
+	}
+
+	public void setDoctorId(Long doctorId) {
+		this.doctorId = doctorId;
+	}
+
+	public Long getPatientId() {
+		return patientId;
+	}
+
+	public void setPatientId(Long patientId) {
+		this.patientId = patientId;
+	}
+
+	public SenderRole getSenderRole() {
+		return senderRole;
+	}
+
+	public void setSenderRole(SenderRole senderRole) {
+		this.senderRole = senderRole;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public LocalDateTime getSentAt() {
+		return sentAt;
+	}
+
+	public void setSentAt(LocalDateTime sentAt) {
+		this.sentAt = sentAt;
+	}
+
+	public boolean isRead() {
+		return isRead;
+	}
+
+	public void setRead(boolean isRead) {
+		this.isRead = isRead;
+	}
+
     
 }

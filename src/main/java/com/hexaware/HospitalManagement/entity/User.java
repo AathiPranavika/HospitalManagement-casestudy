@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,7 +45,7 @@ public class User {
 
 	@NotBlank(message = "Password is required")
 	@Size(min = 6, message = "Password must have minimum 6 characters")
-	@Column(nullable = false, length = 30)
+	@Column(nullable = false, length = 255)
 	private String password;
 
 	@NotNull(message = "Role is required")
@@ -72,10 +74,18 @@ public class User {
 	    private LocalDateTime createdAt;
 
 	 @OneToOne(mappedBy="user", cascade = CascadeType.ALL) 
+	 @JsonManagedReference
 	 private Patient patient;
 	
 	 @OneToOne(mappedBy="user", cascade = CascadeType.ALL) 
+	 @JsonManagedReference
 	 private Doctor doctor;
+	 
+
+	 @OneToOne(mappedBy="user", cascade = CascadeType.ALL) 
+	 @JsonManagedReference
+	 private Admin admin;
+	
 
 	public enum Role {
 		PATIENT, DOCTOR, ADMIN;

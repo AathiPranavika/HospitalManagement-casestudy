@@ -1,0 +1,78 @@
+package com.hexaware.HospitalManagement.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hexaware.HospitalManagement.entity.Appointment;
+import com.hexaware.HospitalManagement.entity.MedicalRecord;
+import com.hexaware.HospitalManagement.entity.Prescription;
+import com.hexaware.HospitalManagement.repository.AppointmentRepository;
+import com.hexaware.HospitalManagement.repository.DoctorRepository;
+import com.hexaware.HospitalManagement.repository.MedicalRecordRepository;
+import com.hexaware.HospitalManagement.repository.PatientRepository;
+import com.hexaware.HospitalManagement.repository.PrescriptionRepository;
+@Service("userAccessService")
+public class UserAccessService {
+
+    @Autowired
+    private PatientRepository patientRepository;  
+
+    @Autowired
+    private DoctorRepository doctorRepository;  
+    
+    @Autowired
+    private AppointmentRepository appointmentRepository;
+    
+    @Autowired
+    private PrescriptionRepository prescriptionRepository;
+    
+    @Autowired
+    private MedicalRecordRepository medicalRecordRepository;
+
+    // Check if userId owns this patientId
+    public boolean userOwnsPatient(Long userId, Long patientId) {
+        return patientRepository.existsByPatientIdAndUserUserId(patientId, userId);
+    }
+
+    public boolean userOwnsDoctor(Long userId, Long doctorId) {
+        return doctorRepository.existsByDoctorIdAndUserUserId(doctorId, userId);
+    }
+    
+    public boolean userOwnsAppointment(Long userId, Long appointmentId) {
+        Appointment appt = appointmentRepository.findById(appointmentId).orElse(null);
+        if (appt == null) return false;
+        Long patientUserId = appt.getPatient().getUser().getUserId();
+        return patientUserId.equals(userId);
+    }
+    
+    public boolean userOwnsPrescription(Long userId, Long prescriptionId) {
+        Prescription prescription = prescriptionRepository.findById(prescriptionId).orElse(null);
+        if (prescription == null) return false;
+
+        Long doctorUserId = prescription.getMedicalRecord().getAppointment()
+                                         .getDoctor()
+                                         .getUser()
+                                         .getUserId();
+
+        return doctorUserId.equals(userId);
+    }
+    
+    public boolean userOwnsMedicalRecord(Long userId, Long recordId) {
+        MedicalRecord record = medicalRecordRepository.findById(recordId).orElse(null);
+        if (record == null) return false;
+
+        Long doctorUserId = record.getAppointment().getDoctor().getUser().getUserId();
+
+        return doctorUserId.equals(userId);
+    }
+    
+    public boolean doctorUserOwnsAppointment(Long userId, Long appointmentId) {
+        Appointment appt = appointmentRepository.findById(appointmentId).orElse(null);
+        if (appt == null) return false;
+        Long doctorUserId = appt.getDoctor().getUser().getUserId();
+        return doctorUserId.equals(userId);
+    }
+
+
+
+}

@@ -18,5 +18,7 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 	
 	List<Patient> findByBloodGroup(String bloodGroup);
 
+	List<Patient> findByUserNameContainingIgnoreCase(String name);
 
+	boolean existsByPatientIdAndUserUserId(Long doctorId, Long userId);
 }

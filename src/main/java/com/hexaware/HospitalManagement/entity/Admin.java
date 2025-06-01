@@ -1,5 +1,6 @@
 package com.hexaware.HospitalManagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -39,9 +40,10 @@ public class Admin {
 
     
     @NotNull(message = "User account must be linked")
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "userId", nullable = false,
                 foreignKey = @ForeignKey(name = "fk_admin_user"))
+    @JsonBackReference
     private User user;
 
    
