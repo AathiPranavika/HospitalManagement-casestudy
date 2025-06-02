@@ -1,5 +1,9 @@
 package com.hexaware.HospitalManagement.filter;
-
+/**
+ * Filter that intercepts incoming HTTP requests once per request to validate JWT tokens.
+* @author Aathi Pranavika
+* @version 1.0
+* */
 import java.io.IOException;
 import java.util.Collection;
 

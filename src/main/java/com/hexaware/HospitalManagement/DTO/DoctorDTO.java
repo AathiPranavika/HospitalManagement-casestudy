@@ -1,5 +1,10 @@
 package com.hexaware.HospitalManagement.DTO;
 
+/**
+ * DoctorDTO is a data carrier class for transferring Doctor details with validation.
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

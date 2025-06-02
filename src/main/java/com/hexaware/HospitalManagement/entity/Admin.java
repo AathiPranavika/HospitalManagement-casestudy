@@ -1,5 +1,9 @@
 package com.hexaware.HospitalManagement.entity;
-
+/**
+ * Entity class representing an Admin in the Hospital Management System.
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

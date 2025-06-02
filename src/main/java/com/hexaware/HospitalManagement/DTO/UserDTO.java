@@ -1,5 +1,11 @@
 package com.hexaware.HospitalManagement.DTO;
 
+
+/**
+ * UserDTO is a data carrier class for transferring User details with validation.
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import java.time.LocalDate;
 
 import com.hexaware.HospitalManagement.entity.User;

@@ -35,12 +35,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>("duplicate patient exception", HttpStatus.CONFLICT);
     }
 
-	/*
-	 * @ExceptionHandler(Exception.class) public ResponseEntity<String>
-	 * handleGeneric(Exception ex) { return new
-	 * ResponseEntity<>("Internal Server Error: " + ex.getMessage(),
-	 * HttpStatus.INTERNAL_SERVER_ERROR); }
-	 */
     @ExceptionHandler(AppointmentNotFoundException.class)
     public ResponseEntity<String> handleNotFound(AppointmentNotFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);

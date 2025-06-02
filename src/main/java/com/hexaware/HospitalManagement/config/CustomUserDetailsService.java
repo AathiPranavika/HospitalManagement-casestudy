@@ -1,5 +1,9 @@
 package com.hexaware.HospitalManagement.config;
-
+/**
+ * class that defines CustomUserDetailsService by implementing UserDetailsService
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;

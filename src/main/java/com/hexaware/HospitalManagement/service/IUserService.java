@@ -1,5 +1,10 @@
 package com.hexaware.HospitalManagement.service;
-
+/**
+ * Service interface for managing user-related operations in the Hospital Management System.
+ * * 
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import com.hexaware.HospitalManagement.DTO.UserDTO;
 import com.hexaware.HospitalManagement.entity.User;
 import com.hexaware.HospitalManagement.exception.UserNotFoundException;

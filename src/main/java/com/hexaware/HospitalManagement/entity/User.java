@@ -1,5 +1,9 @@
 package com.hexaware.HospitalManagement.entity;
-
+/**
+ * Entity class representing User in the Hospital Management System.
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -24,7 +28,6 @@ import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-//except hibernate annotations->db level validations all are java level validations
 @Entity
 @Table(name = "users")
 public class User {

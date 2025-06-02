@@ -1,5 +1,10 @@
 package com.hexaware.HospitalManagement.restController;
-
+/**
+* REST controller for authentication-related operations in the Hospital Management System.
+* * 
+* @author Aathi Pranavika
+* @version 1.0
+* */
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

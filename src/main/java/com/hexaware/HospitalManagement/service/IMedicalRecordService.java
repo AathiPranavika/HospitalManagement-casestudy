@@ -1,5 +1,10 @@
 package com.hexaware.HospitalManagement.service;
-
+/**
+ * Service interface for managing medical record-related operations in the Hospital Management System.
+ * * 
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import com.hexaware.HospitalManagement.DTO.MedicalRecordDTO;
 import com.hexaware.HospitalManagement.entity.MedicalRecord;
 import com.hexaware.HospitalManagement.exception.AppointmentNotFoundException;

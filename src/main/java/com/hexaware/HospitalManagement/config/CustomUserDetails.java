@@ -1,5 +1,9 @@
 package com.hexaware.HospitalManagement.config;
-
+/**
+ * class that defines CustomUserDetails by implementing UserDetails
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import java.util.Collection;
 import java.util.Collections;
 

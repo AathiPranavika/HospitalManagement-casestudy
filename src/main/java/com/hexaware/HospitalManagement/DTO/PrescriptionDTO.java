@@ -1,5 +1,11 @@
 package com.hexaware.HospitalManagement.DTO;
 
+
+/**
+ * PrescriptionDTO is a data carrier class for transferring Prescription details with validation.
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

@@ -1,8 +1,13 @@
 package com.hexaware.HospitalManagement.DTO;
-
+/**
+ * AdminDTO is a data carrier class for transferring Admin details with validation.
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+
 
 public class AdminDTO {
 

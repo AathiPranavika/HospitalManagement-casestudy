@@ -11,14 +11,36 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 @Configuration
 public class SwaggerConfig {
 
+	/*
+	 * @Bean public OpenAPI customOpenAPI() {
+	 * 
+	 * return new OpenAPI() .info(new
+	 * Info().title("JavaInUse Authentication Service")) .addSecurityItem(new
+	 * SecurityRequirement().addList("JavaInUseSecurityScheme")) .components(new
+	 * Components().addSecuritySchemes("JavaInUseSecurityScheme", new
+	 * SecurityScheme()
+	 * .name("JavaInUseSecurityScheme").type(SecurityScheme.Type.HTTP).scheme(
+	 * "bearer").bearerFormat("JWT")));
+	 * 
+	 * }
+	 */
 	@Bean
 	public OpenAPI customOpenAPI() {
-		
-		return new OpenAPI()
-				.info(new Info().title("JavaInUse Authentication Service"))				
-				.addSecurityItem(new SecurityRequirement().addList("JavaInUseSecurityScheme"))
-				.components(new Components().addSecuritySchemes("JavaInUseSecurityScheme", new SecurityScheme()
-						.name("JavaInUseSecurityScheme").type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")));
-		
+	    final String securitySchemeName = "JWTAuthentication";
+
+	    return new OpenAPI()
+	            .info(new Info()
+	                    .title("Hospital Management System API")
+	                    .description("This API provides access to the Hospital Management System's functionalities including patient records, appointments, staff management, and more.")
+	                    .version("1.0.0"))
+	            .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
+	            .components(new Components()
+	                    .addSecuritySchemes(securitySchemeName,
+	                            new SecurityScheme()
+	                                    .name(securitySchemeName)
+	                                    .type(SecurityScheme.Type.HTTP)
+	                                    .scheme("bearer")
+	                                    .bearerFormat("JWT")));
 	}
+
 }

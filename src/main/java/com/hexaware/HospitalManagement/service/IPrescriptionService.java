@@ -1,5 +1,10 @@
 package com.hexaware.HospitalManagement.service;
-
+/**
+ * Service interface for managing prescription-related operations in the Hospital Management System.
+ * * 
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import com.hexaware.HospitalManagement.DTO.PrescriptionDTO;
 import com.hexaware.HospitalManagement.entity.Prescription;
 import com.hexaware.HospitalManagement.exception.MedicalRecordNotFoundException;

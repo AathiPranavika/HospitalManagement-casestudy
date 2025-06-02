@@ -1,4 +1,10 @@
 package com.hexaware.HospitalManagement.DTO;
+
+/**
+ * MessageDTO is a data carrier class for transferring Message details with validation.
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import java.time.LocalDateTime;
 
 import com.hexaware.HospitalManagement.enums.SenderRole;

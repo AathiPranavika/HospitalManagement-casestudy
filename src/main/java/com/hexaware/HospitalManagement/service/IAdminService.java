@@ -1,5 +1,10 @@
 package com.hexaware.HospitalManagement.service;
-
+/**
+ * Service interface for managing admin-related operations in the Hospital Management System.
+ * * 
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import java.time.LocalDateTime;
 import java.util.List;
 

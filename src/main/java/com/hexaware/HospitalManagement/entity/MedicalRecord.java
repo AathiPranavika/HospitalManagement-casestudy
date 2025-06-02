@@ -1,5 +1,9 @@
 package com.hexaware.HospitalManagement.entity;
-
+/**
+ * Entity class representing an MedicalRecord in the Hospital Management System.
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;

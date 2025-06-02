@@ -1,5 +1,11 @@
 package com.hexaware.HospitalManagement.DTO;
 
+
+/**
+ * MedicalRecordDTO is a data carrier class for transferring MedicalRecord details with validation.
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

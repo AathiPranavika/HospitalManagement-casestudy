@@ -1,5 +1,9 @@
 package com.hexaware.HospitalManagement.config;
-
+/**
+ * Defines the security filter chain for HTTP requests.
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

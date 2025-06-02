@@ -1,5 +1,10 @@
 package com.hexaware.HospitalManagement.service;
 
+/**
+ * Service for verifying whether a user has access to a specific resource such as a patient, doctor, appointment, prescription, or medical record.
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,5 +1,10 @@
 package com.hexaware.HospitalManagement.DTO;
 
+/**
+ * AppointmentDTO is a data carrier class for transferring Appointment details with validation.
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import java.time.LocalDateTime;
 
 import com.hexaware.HospitalManagement.entity.Appointment.AppointmentStatus;

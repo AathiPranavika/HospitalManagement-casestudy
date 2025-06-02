@@ -1,5 +1,11 @@
 package com.hexaware.HospitalManagement.service;
-
+/**
+ * Service responsible for generating, parsing, and validating JWT tokens.
+ * Used for secure authentication and authorization in the Hospital Management System.
+ * 
+ * @author Aathi Pranavika G S
+ * @version 1.0
+ */
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;

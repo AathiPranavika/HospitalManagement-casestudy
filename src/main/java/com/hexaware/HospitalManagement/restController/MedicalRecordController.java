@@ -1,5 +1,10 @@
 package com.hexaware.HospitalManagement.restController;
-
+/**
+* REST controller for medicalRecords-related operations in the Hospital Management System.
+* * 
+* @author Aathi Pranavika
+* @version 1.0
+* */
 import java.util.List;
 
 import org.slf4j.Logger;

@@ -1,5 +1,9 @@
 package com.hexaware.HospitalManagement.service;
-
+/**
+ * Service implementation for managing patient operations in the Hospital Management System.
+ * @author Aathi Pranavika
+ * @version 1.0
+ */
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

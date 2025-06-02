@@ -62,3 +62,41 @@
 [INFO]  :  Closing JPA EntityManagerFactory for persistence unit 'default'
 [INFO]  :  HikariPool-1 - Shutdown initiated...
 [INFO]  :  HikariPool-1 - Shutdown completed.
+[INFO]  :  Starting HospitalManageSpringRestApplication using Java 21.0.6 with PID 8940 (D:\spring workspace\HospitalManage_SpringRest\target\classes started by admin in D:\spring workspace\HospitalManage_SpringRest)
+[INFO]  :  No active profile set, falling back to 1 default profile: "default"
+[INFO]  :  Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[INFO]  :  Finished Spring Data repository scanning in 88 ms. Found 7 JPA repository interfaces.
+[INFO]  :  Tomcat initialized with port 8080 (http)
+[INFO]  :  Starting service [Tomcat]
+[INFO]  :  Starting Servlet engine: [Apache Tomcat/10.1.40]
+[INFO]  :  Initializing Spring embedded WebApplicationContext
+[INFO]  :  Root WebApplicationContext: initialization completed in 2378 ms
+[INFO]  :  HHH000204: Processing PersistenceUnitInfo [name: default]
+[INFO]  :  HHH000412: Hibernate ORM core version 6.5.3.Final
+[INFO]  :  HHH000026: Second-level cache disabled
+[INFO]  :  No LoadTimeWeaver setup: ignoring JPA class transformer
+[INFO]  :  HikariPool-1 - Starting...
+[INFO]  :  HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4f552aa2
+[INFO]  :  HikariPool-1 - Start completed.
+[WARN]  :  HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+[INFO]  :  HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO]  :  Initialized JPA EntityManagerFactory for persistence unit 'default'
+[INFO]  :  Hibernate is in classpath; If applicable, HQL parser will be used.
+[INFO]  :  Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+[WARN]  :  Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+[WARN]  :  spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[INFO]  :  Tomcat started on port 8080 (http) with context path '/'
+[INFO]  :  Started HospitalManageSpringRestApplication in 9.209 seconds (process running for 10.273)
+[INFO]  :  Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO]  :  Initializing Servlet 'dispatcherServlet'
+[INFO]  :  Completed initialization in 4 ms
+[INFO]  :  Init duration for springdoc-openapi is: 1658 ms
+[INFO]  :  Token : eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUEFUSUVOVCIsInN1YiI6Im5lZWxhLnBhdGllbnRAZ21haWwuY29tIiwiaWF0IjoxNzQ4ODM4NjMwLCJleHAiOjE3NDg5MjUwMzB9.MoEcTE9OhpSQ_U5OmHyVP5D-92VP9Gw3tawcJgZjk4w
+[INFO]  :  Booking appointment for patientId: 2
+[INFO]  :  Token : eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiJhcnVuLmFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTc0ODgzODc2OCwiZXhwIjoxNzQ4OTI1MTY4fQ.q2FvCMg19x0MPgAuN5_hDRY7mOCzQb1eQ_hdDAg_ghs
+[INFO]  :  Confirming appointment id: 14 for datetime: 2025-07-01T10:00
+[INFO]  :  Confirming appointment id: 14 for datetime: 2025-07-01T10:00
+[INFO]  :  Application shutdown requested.
+[INFO]  :  Closing JPA EntityManagerFactory for persistence unit 'default'
+[INFO]  :  HikariPool-1 - Shutdown initiated...
+[INFO]  :  HikariPool-1 - Shutdown completed.
