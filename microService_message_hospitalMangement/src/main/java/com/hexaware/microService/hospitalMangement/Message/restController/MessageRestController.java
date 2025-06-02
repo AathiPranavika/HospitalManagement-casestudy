@@ -12,7 +12,7 @@ import com.hexaware.microService.hospitalMangement.Message.exception.MessageNotF
 import com.hexaware.microService.hospitalMangement.Message.service.IMessageService;
 
 @RestController
-@RequestMapping("/api/message")
+@RequestMapping("/api/messages")
 public class MessageRestController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class MessageRestController {
         return ResponseEntity.ok(savedMessage);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("getbyid/{id}")
     public ResponseEntity<Message> getMessageById(@PathVariable Long id) throws MessageNotFoundException {
         Message message = messageService.getMessageById(id);
         return ResponseEntity.ok(message);
@@ -68,10 +68,12 @@ public class MessageRestController {
 
     @GetMapping("/sent/patient/{patientId}")
     public ResponseEntity<List<Message>> getMessagesSentByPatient(@PathVariable Long patientId) {
+    	System.out.println("hello message service");
         List<Message> messages = messageService.getMessagesSentByPatient(patientId);
         return ResponseEntity.ok(messages);
     }
 
+   
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteMessage(@PathVariable Long id) {
         boolean deleted = messageService.deleteMessage(id);
